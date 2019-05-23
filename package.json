@@ -1,0 +1,40 @@
+{
+  "name": "grunt-jsonfile",
+  "version": "0.1.2",
+  "description": "use grunt to create *.json files",
+  "author": "Dirk Brenckmann <db.developer@gmx.de>",
+  "license": "MIT",
+  "engines": {
+    "node": ">=10.15.1"
+  },
+  "main": "tasks/tasks.js",
+  "scripts": {
+    "test": "grunt test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/db-developer/grunt-jsonfile.git"
+  },
+  "keywords": [
+    "grunt",
+    "json",
+    "package.json",
+    "tsconfig.json"
+  ],
+  "files": [
+    "tasks"
+  ],
+  "bugs": {
+    "url": "https://github.com/db-developer/grunt-jsonfile/issues"
+  },
+  "homepage": "https://github.com/db-developer/grunt-jsonfile#readme",
+  "peerDependencies": {
+    "grunt": ">=1.0.0"
+  },
+  "devDependencies": {
+    "grunt": "^1.0.4",
+    "grunt-contrib-copy": "^1.0.0",
+    "grunt-contrib-jshint": "^2.1.0",
+    "grunt-shell": "^3.0.1"
+  }
+}
