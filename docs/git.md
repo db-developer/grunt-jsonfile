@@ -1,11 +1,11 @@
 
 git remote add github https://github.com/db-developer/grunt-jsonfile.git
-git remote add backup //.../git/@db-developer.grunt-jsonfile.git
+git remote add backup //.../git/@db-developer-grunt-jsonfile.git
 
 .git/config add the following (3) lines:
 [remote "origin"]
   url = https://github.com/db-developer/grunt-jsonfile.git
-  url = //.../git/@db-developer.grunt-jsonfile.git
+  url = //.../git/@db-developer-grunt-jsonfile.git
 
 You can then push to both repositories by issuing:
 
