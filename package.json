@@ -9,6 +9,7 @@
   },
   "main": "tasks/tasks.js",
   "scripts": {
+    "build": "grunt default",
     "test": "grunt test"
   },
   "repository": {

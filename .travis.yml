@@ -6,3 +6,7 @@ node_js:
 # not recuired as of 2016(?)
 # before_script:
 #  - npm install grunt-cli -g
+
+script:
+  - npm run test  # get the tests run before building
+  - npm run build # we have a build badge, so run the build
