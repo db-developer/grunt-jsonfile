@@ -71,7 +71,7 @@ module.exports = function( grunt ) {
         options: {
           reporter: "spec"
         },
-        src: [ "test/**/*js" ]
+        src: [ "test/**/*.spec.js" ]
       }
     }, // end of mochaTest
 
@@ -99,7 +99,7 @@ module.exports = function( grunt ) {
   grunt.loadNpmTasks( "grunt-shell"          );
 
   // run lint and tests for testing only (travis_ci)
-  grunt.registerTask( "test", [ ]);
+  grunt.registerTask( "test",    [ "jshint", "clean", "mkdir", "mochaTest:test" ]);
 
   // run lint and all tests by default before packaging
   grunt.registerTask( "default", [ "jshint", "clean", "mkdir", "shell:npm_pack", "copy:pkgfile_to_latest", "move:pkgfiles_to_dist" ]);

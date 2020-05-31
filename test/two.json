@@ -1,0 +1,7 @@
+{
+  "pname1":     5,
+  "pname2":     true,
+  "pname3":     "value",
+  "pname4":     "${ BUILD }",
+  "aproperty":  "a aproperty will be deleted"
+}
