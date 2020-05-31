@@ -4,116 +4,103 @@
  */
 "use strict";
 
-const BUILD       = "build";
+const COVERAGE    = "coverage";
+const DIST        = "dist";
+const GRUNTFILE   = "gruntfile.js";
 const PACKAGEJSON = "package.json";
+const PKGJSONOPT  = "pkgjson";
+const REPORTS     = "reports";
+const TASKS       = "tasks";
+
+
+const COVERAGEDIR = `${ DIST }/${ COVERAGE }`;
+const DISTDIR     = `${ DIST }`;
+const REPORTSDIR  = `${ DIST }/${ REPORTS }`;
+const TASKSDIR    = `${ TASKS }`;
 
 module.exports = function( grunt ) {
+
   // set grunt options
-  grunt.option( "pkgjson",  grunt.file.readJSON( PACKAGEJSON ));
+  grunt.option( PKGJSONOPT,  grunt.file.readJSON( PACKAGEJSON ));
+
+  const pkgname     = grunt.option( PKGJSONOPT ).name;
+  const pkgversion  = grunt.option( PKGJSONOPT ).version;
+  const pkgfilename = `${ pkgname }-${ pkgversion }.tgz`;
 
   grunt.initConfig({
 
     jshint: {
       all: [
-        "gruntfile.js",
-        "tasks/*.js"
+        GRUNTFILE,
+        `${ TASKSDIR }/*.js`
       ],
       options: {
         jshintrc: ".jshintrc"
       }
     }, // end of jshint
 
-    jsonfile: {
-      options: {
-        templates: {
-          one:  "package.json",
-          two: {
-            pname1:     5,
-            pname2:     true,
-            pname3:     "value",
-            pname4:     `${ BUILD }`,
-            aproperty:  "a aproperty will be deleted"
-          },
-          three: {
-            compilerOptions: {
-              // default typescript compiler options
-              outDir                  : "xxx",
-              target                  : "xxx",
-              module                  : "xxx",
-              moduleResolution        : "node",
-              declaration             : true,
-              // sourceMap              : true, // cannot be used together with inlineSourceMap
-              inlineSourceMap         : true,
-              inlineSources           : true,
-              emitDecoratorMetadata   : true,
-              experimentalDecorators  : true,
-              importHelpers           : true,
-              typeRoots               : [ "node_modules/@types", "lib/@types" ],
-              lib                     : [ "dom", "es2018" ]
-            },
-            include : [ "../build/**/*.ts"   ],
-            exclude : [ "../build/test/**/*" ]
-          }
-        }
+    clean: {
+      coverage: {
+        src: [ `${ COVERAGEDIR }/` ]
       },
-      target1: {
-        template: "one",
-        dest:     `${ BUILD }/target1.json`,
-        set: {
-          name:   "foo-bar-baz"
-        },
-        merge: {
-          peerDependencies: null,
-          devDependencies:  null
-        }
+      reports: {
+        src: [ `${ REPORTSDIR }/` ]
       },
-      target2: {
-        template: "two",
-        dest:     `${ BUILD }/target2.json`,
-        set: {
-          pname1: "value 5 replaced"
-        },
-        merge: {
-          aproperty: null
-        }
-      },
-      target3: {
-        template: "three",
-        dest:     [ `${ BUILD }/target3.1.json`,
-                    `${ BUILD }/target3.2.json`,
-                    `${ BUILD }/target3.3.json` ],
-        set: {
-          blubb1: "blubb1",
-          blubb2: "blubb2"
-        },
-        merge: {
-          compilerOptions: {
-            fun   : "more fun",
-            nofun : "no more fun"
-          },
-          blubb1: null
-        },
+      dist: {
+        src: [ `${ DISTDIR }/` ]
       }
-    }, // end of jsonfiles
+    }, // end of clean
 
-    // deployment
+    copy: {
+      pkgfile_to_latest: {
+        src:  pkgfilename,
+        dest: `${ grunt.option( PKGJSONOPT ).name }-latest.tgz`
+      }
+    }, // end of copy
+
+    mkdir: {
+      all: {
+        options: {
+          create: [ DISTDIR ]
+        }
+      }
+    }, // end of mkdir
+
+    mochaTest: {
+      test: {
+        options: {
+          reporter: "spec"
+        },
+        src: [ "test/**/*js" ]
+      }
+    }, // end of mochaTest
+
+    move: {
+      pkgfiles_to_dist: {
+        src:  "*.tgz",
+        dest: `${ DISTDIR }/`
+      }
+    }, // end of move
+
+    // create distributable package
     shell: {
       npm_pack: {
         command: "npm pack"
-      },
-      npm_move_win: {
-        command: "move *.tgz ./dist/"
       }
     }
   }); // end of grunt.initConfig({ ... })
 
-  // load this plugin's task(s) to run (test) them
-  grunt.loadTasks( "tasks" );
+  grunt.loadNpmTasks( "grunt-contrib-clean"  );
+  grunt.loadNpmTasks( "grunt-contrib-copy"   );
+  grunt.loadNpmTasks( "grunt-contrib-jshint" );
+  grunt.loadNpmTasks( "grunt-mkdir"          );
+  grunt.loadNpmTasks( "grunt-mocha-test"     );
+  grunt.loadNpmTasks( "grunt-move"           );
+  grunt.loadNpmTasks( "grunt-shell"          );
 
-  grunt.loadNpmTasks( "grunt-contrib-copy"     );
-  grunt.loadNpmTasks( "grunt-contrib-jshint"   );
-  grunt.loadNpmTasks( "grunt-shell"            );
+  // run lint and tests for testing only (travis_ci)
+  grunt.registerTask( "test", [ ]);
 
-  // run lint and all tests by default
-  grunt.registerTask( "default", [ "jshint", "jsonfile", "shell:npm_pack", "shell:npm_move_win" ]);
+  // run lint and all tests by default before packaging
+  grunt.registerTask( "default", [ "jshint", "clean", "mkdir", "shell:npm_pack", "copy:pkgfile_to_latest", "move:pkgfiles_to_dist" ]);
 };

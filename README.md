@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.com/db-developer/grunt-jsonfile.svg?branch=master)](https://travis-ci.com/db-developer/grunt-jsonfile)
 # grunt-jsonfile
 use grunt to create and modify jsonfiles
 
