@@ -58,7 +58,14 @@ function getTemplate( grunt, taskoptions, targetconfig ) {
 }
 
 /**
+ *  Merge keys from container into target. Keys which are set to null
+ *  within container, will be deleted from target.
  *
+ *  Note: This is a "deep-deep" merge.
+ *
+ *  @param  target    {object} a json object
+ *  @param  container {object} a json object which holds key value pairs, which
+ *                             are to be merged into target.
  */
 function mergeValues( target, container ) {
   Object.keys( container ).forEach( function( key /* , index */) {
@@ -82,7 +89,7 @@ function mergeValues( target, container ) {
  *  @param taskconfig   {object} config data for/of task
  *  @param target       {string} name of target currently run
  *  @param targetconfig {object} config data for/of target
- *  @return {void}
+ *  @return json {object} for testing purposes only.
  */
 function gruntMultiTask( grunt, taskconfig, target, targetconfig ) {
 
@@ -101,6 +108,8 @@ function gruntMultiTask( grunt, taskconfig, target, targetconfig ) {
     grunt.file.write( destfile, JSON.stringify( jsontemplate, null, 2 ));
   });
 
+  // return modified jsontemplate for _testing_ purposes.
+  //        this return ist not required by a calling grunt task.
   return jsontemplate;
 }
 
