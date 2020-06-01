@@ -50,7 +50,13 @@ describe( "Testing package 'grunt-jsonfile'", function() {
       });
     });
     describe( "Testing function 'getTemplateFromOptions'", function() {
-      const jsonfile    = grunt.file.readJSON( "test/jsonfile.json" );
+      const tmpjsonfile = grunt.file.readJSON( "test/jsonfile.json" );
+            tmpjsonfile.options.templates = null;
+      it( "template 'one' should resolve to null without 'templates'", function() {
+          const template = lib.getTemplateFromOptions( grunt, tmpjsonfile.options, "one" );
+          assert( template === null, "failed to resolve template 'one' to null without 'templates'." );
+      });
+      const jsonfile = grunt.file.readJSON( "test/jsonfile.json" );
       it( "template 'one' should resolve to package.json {object}", function() {
           const template = lib.getTemplateFromOptions( grunt, jsonfile.options, "one" );
           const pkgjson  = grunt.file.readJSON( "package.json" );
@@ -63,7 +69,14 @@ describe( "Testing package 'grunt-jsonfile'", function() {
       });
     });
     describe( "Testing function 'getTemplate'", function() {
-      const jsonfile    = grunt.file.readJSON( "test/jsonfile.json" );
+      const tmpjsonfile = grunt.file.readJSON( "test/jsonfile.json" );
+            tmpjsonfile.target1.template = null;
+      it( "template of 'target1' should not resolve to null without 'template'", function() {
+          const template = lib.getTemplate( grunt, tmpjsonfile.options, tmpjsonfile.target1 );
+          assert( template, "failed to resolve template of 'target1' without 'template'." );
+      });
+
+      const jsonfile = grunt.file.readJSON( "test/jsonfile.json" );
       it( "template of 'target1' should resolve to package.json {object}", function() {
           const template = lib.getTemplate( grunt, jsonfile.options, jsonfile.target1 );
           const pkgjson  = grunt.file.readJSON( "package.json" );
@@ -74,6 +87,16 @@ describe( "Testing package 'grunt-jsonfile'", function() {
           const twojson  = grunt.file.readJSON( "test/two.json" );
           assert( JSON.stringify( template ) === JSON.stringify( twojson ), "failed to resolve template of 'target2' to {object} two.json." );
       });
+      it( "template of 'target4' should resolve to {object} four.json", function() {
+          const template = lib.getTemplate( grunt, jsonfile.options, jsonfile.target4 );
+          const twojson  = grunt.file.readJSON( "test/four.json" );
+          assert( JSON.stringify( template ) === JSON.stringify( twojson ), "failed to resolve template of 'target4' to {object} four.json." );
+      });
+      it( "template of 'target5' should resolve to {object} package.json", function() {
+          const template = lib.getTemplate( grunt, jsonfile.options, jsonfile.target5 );
+          const pkgjson  = grunt.file.readJSON( "package.json" );
+          assert( JSON.stringify( template ) === JSON.stringify( pkgjson ), "failed to resolve template of 'target5' to {object} package.json." );
+      });
     });
     describe( "Testing function 'mergeValues'", function() {
       const jsonfile    = grunt.file.readJSON( "test/jsonfile.json" );
@@ -83,14 +106,46 @@ describe( "Testing package 'grunt-jsonfile'", function() {
           const pkgjson  = grunt.file.readJSON( "test/merged.package.json" );
           assert( JSON.stringify( template ) === JSON.stringify( pkgjson ), "failed to merge template of 'target1' to merged.package.json {object}." );
       });
-    });
-    describe( "Testing function 'mergeValues'", function() {
-      const jsonfile    = grunt.file.readJSON( "test/jsonfile.json" );
-      it( "template of 'target1' should morph to grunt.package.json {object}", function() {
-          const gntjson  = lib.gruntMultiTask( grunt, jsonfile, "dist/target1", jsonfile.target1 );
-          const pkgjson  = grunt.file.readJSON( "test/grunt.package.json" );
-          assert( JSON.stringify( gntjson ) === JSON.stringify( pkgjson ), "failed to morph template of 'target1' to grunt.package.json {object}." );
+      it( "template of 'target2' should merge to merged.two.json {object}", function() {
+          const template = lib.getTemplate( grunt, jsonfile.options, jsonfile.target2 );
+                           lib.mergeValues( template, jsonfile.target2.merge );
+          const twojson  = grunt.file.readJSON( "test/merged.two.json" );
+          assert( JSON.stringify( template ) === JSON.stringify( twojson ), "failed to merge template of 'target2' to merged.two.json {object}." );
       });
+      it( "template of 'target3' should merge to merged.three.json {object}", function() {
+          const template  = lib.getTemplate( grunt, jsonfile.options, jsonfile.target3 );
+                            lib.mergeValues( template, jsonfile.target3.merge );
+          const threejson = grunt.file.readJSON( "test/merged.three.json" );
+          assert( JSON.stringify( template ) === JSON.stringify( threejson ), "failed to merge template of 'target3' to merged.three.json {object}." );
+      });
+    });
+    describe( "Testing function 'gruntMultiTask'", function() {
+      const jsonfile    = grunt.file.readJSON( "test/jsonfile.json" );
+      it( "template of 'target1' should morph to morphed.package.json {object}", function() {
+          const gntjson = lib.gruntMultiTask( grunt, jsonfile, "dist/target1", jsonfile.target1 );
+          const pkgjson = grunt.file.readJSON( "test/morphed.package.json" );
+          assert( JSON.stringify( gntjson ) === JSON.stringify( pkgjson ), "failed to morph template of 'target1' to morphed.package.json {object}." );
+      });
+      it( "template of 'target2' should morph to morphed.two.json {object}", function() {
+          const gntjson = lib.gruntMultiTask( grunt, jsonfile, "dist/target2", jsonfile.target2 );
+          const twojson = grunt.file.readJSON( "test/morphed.two.json" );
+          assert( JSON.stringify( gntjson ) === JSON.stringify( twojson ), "failed to morph template of 'target2' to morphed.two.json {object}." );
+      });
+      it( "template of 'target3' should morph to morphed.three.json {object}", function() {
+          const gntjson   = lib.gruntMultiTask( grunt, jsonfile, "dist/target3", jsonfile.target3 );
+          const threejson = grunt.file.readJSON( "test/morphed.three.json" );
+          assert( JSON.stringify( gntjson ) === JSON.stringify( threejson ), "failed to morph template of 'target3' to morphed.three.json {object}." );
+      });
+    });
+  });
+  describe( "Module 'tasks'", function() {
+    describe( "... should contain", function() {
+      it( "function 'tasks'", function() {
+        assert( tasks, "failed to locate function 'tasks'" );
+      });
+    });
+    describe( "Testing function 'tasks'", function() {
+      tasks( grunt );
     });
   });
 });

@@ -10,6 +10,7 @@
   "main": "tasks/tasks.js",
   "scripts": {
     "build": "grunt default",
+    "coverage": "grunt coverage",
     "test": "grunt test"
   },
   "repository": {
@@ -38,9 +39,11 @@
     "grunt-contrib-copy": "^1.0.0",
     "grunt-contrib-jshint": "^2.1.0",
     "grunt-mkdir": "^1.0.0",
+    "grunt-mocha-istanbul": "^5.0.2",
     "grunt-mocha-test": "^0.13.3",
     "grunt-move": "^1.0.3",
     "grunt-shell": "^3.0.1",
+    "istanbul": "^0.4.5",
     "mocha": "^7.2.0"
   }
 }

@@ -62,6 +62,7 @@ function getTemplate( grunt, taskoptions, targetconfig ) {
  */
 function mergeValues( target, container ) {
   Object.keys( container ).forEach( function( key /* , index */) {
+    /* istanbul ignore else */
     if (( ! target[ key ]) ||
         ( isString( target[ key ]) || isNumber( target[ key ]) || Array.isArray( target[ key ]))) {
           if ( container[ key ]) { target[ key ] = container[ key ]; }
@@ -89,6 +90,7 @@ function gruntMultiTask( grunt, taskconfig, target, targetconfig ) {
       jsontemplate = ( targetconfig && ( targetconfig.set )) ?
                        Object.assign( jsontemplate, targetconfig.set ) : jsontemplate;
 
+  /* istanbul ignore else: not required/nothing to do for else */
   if ( targetconfig && ( targetconfig.merge )) {
        mergeValues( jsontemplate, targetconfig.merge );
   }

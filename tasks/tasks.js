@@ -17,7 +17,7 @@ module.exports = function( grunt ) {
   // provide default configuration
   const taskconfig = grunt.config()[ TASKNAME ] || GRUNTEXTENSIONCONFIG;
 
-  grunt.task.registerMultiTask( TASKNAME, TASKDESCRIPTION, function() {
+  grunt.task.registerMultiTask( TASKNAME, TASKDESCRIPTION, /* istanbul ignore next */ function() {
     const targetconfig = this.data || GRUNTTARGETCONFIG;
     lib.gruntMultiTask( grunt, taskconfig, this.target, targetconfig );
   });

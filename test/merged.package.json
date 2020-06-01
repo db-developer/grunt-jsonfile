@@ -10,6 +10,7 @@
   "main": "tasks/tasks.js",
   "scripts": {
     "build": "grunt default",
+    "coverage": "grunt coverage",
     "test": "grunt test"
   },
   "repository": {

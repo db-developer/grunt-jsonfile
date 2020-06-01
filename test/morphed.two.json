@@ -1,0 +1,6 @@
+{
+  "pname1":     "value 5 replaced",
+  "pname2":     true,
+  "pname3":     "value",
+  "pname4":     "${ BUILD }"
+}

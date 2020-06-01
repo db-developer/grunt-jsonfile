@@ -42,7 +42,7 @@
   },
   "target2": {
     "template": "two",
-    "dest":     "${ BUILD }/target2.json",
+    "dest":     "dist/target2.json",
     "set": {
       "pname1": "value 5 replaced"
     },
@@ -52,9 +52,9 @@
   },
   "target3": {
     "template": "three",
-    "dest":     [ "${ BUILD }/target3.1.json",
-                  "${ BUILD }/target3.2.json",
-                  "${ BUILD }/target3.3.json" ],
+    "dest":     [ "dist/target3.1.json",
+                  "dist/target3.2.json",
+                  "dist/target3.3.json" ],
     "set": {
       "blubb1": "blubb1",
       "blubb2": "blubb2"
@@ -66,5 +66,26 @@
       },
       "blubb1": null
     }
+  },
+  "target4": {
+    "template": {
+      "some": "example"
+    },
+    "dest":     [ "dist/target4.json" ],
+    "set": {
+      "blubb1": "blubb1",
+      "blubb2": "blubb2"
+    },
+    "merge": {
+      "compilerOptions": {
+        "fun"   : "more fun",
+        "nofun" : "no more fun"
+      },
+      "blubb1": null
+    }
+  },
+  "target5": {
+    "template": "package.json",
+    "dest": "dist/target5.json"
   }
 }

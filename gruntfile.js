@@ -66,6 +66,24 @@ module.exports = function( grunt ) {
       }
     }, // end of mkdir
 
+    mocha_istanbul: {
+      coverage: {
+        src: "test",
+        options: {
+          timeout: 20000,
+          "report-formats": "html",
+          print: "summary",
+          coverageFolder: COVERAGEDIR,
+          check: {
+            lines: 90,
+            statements: 90,
+            functions: 100,
+            branches: 80
+          }
+        }
+      }
+    }, // end of mocha_istanbul
+
     mochaTest: {
       test: {
         options: {
@@ -94,13 +112,17 @@ module.exports = function( grunt ) {
   grunt.loadNpmTasks( "grunt-contrib-copy"   );
   grunt.loadNpmTasks( "grunt-contrib-jshint" );
   grunt.loadNpmTasks( "grunt-mkdir"          );
+  grunt.loadNpmTasks( "grunt-mocha-istanbul" );
   grunt.loadNpmTasks( "grunt-mocha-test"     );
   grunt.loadNpmTasks( "grunt-move"           );
   grunt.loadNpmTasks( "grunt-shell"          );
 
+  //
+  grunt.registerTask( "coverage", [ "jshint", "clean", "mkdir", "mocha_istanbul:coverage" ]);
+
   // run lint and tests for testing only (travis_ci)
-  grunt.registerTask( "test",    [ "jshint", "clean", "mkdir", "mochaTest:test" ]);
+  grunt.registerTask( "test",     [ "jshint", "clean", "mkdir", "mochaTest:test" ]);
 
   // run lint and all tests by default before packaging
-  grunt.registerTask( "default", [ "jshint", "clean", "mkdir", "shell:npm_pack", "copy:pkgfile_to_latest", "move:pkgfiles_to_dist" ]);
+  grunt.registerTask( "default",  [ "jshint", "clean", "mkdir", "shell:npm_pack", "copy:pkgfile_to_latest", "move:pkgfiles_to_dist" ]);
 };
