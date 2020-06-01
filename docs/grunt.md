@@ -19,6 +19,11 @@ With testing (see above) code coverage is available and can be configured by gru
 Open a shell to run code coverage, make sure the environment is set, cd into the forked grunt-jsonfile directory and run: <code>grunt coverage</code>.  
 The results of a code coverage run are located in the directory <code>dist/coverage</code>.
 
+### api docs ###
+
+Open a shell to run generation of api docs. Make sure the environment is set, cd into the forked grunt-jsonfile directory and run: <code>grunt docs</code>.  
+The result of api doc generation is located in the directory <code>´docs/api</code>.
+
 ### building ###
 
 You have the choice of either simply creating grunt-json-&lt;version&gt;.tgz by running <code>grunt build</code> or to run all tests, code coverage and creating grunt-json-&lt;version&gt;.tgz by <code>grunt all</code>.  

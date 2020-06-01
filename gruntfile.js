@@ -58,6 +58,15 @@ module.exports = function( grunt ) {
       }
     }, // end of copy
 
+    jsdoc: {
+      api: {
+        src: [ "tasks/*.js" ],
+        options: {
+          destination: "docs/api"
+        }
+      }
+    }, // end of jsdoc
+
     mkdir: {
       all: {
         options: {
@@ -111,11 +120,17 @@ module.exports = function( grunt ) {
   grunt.loadNpmTasks( "grunt-contrib-clean"  );
   grunt.loadNpmTasks( "grunt-contrib-copy"   );
   grunt.loadNpmTasks( "grunt-contrib-jshint" );
+  grunt.loadNpmTasks( "grunt-jsdoc"          );
   grunt.loadNpmTasks( "grunt-mkdir"          );
   grunt.loadNpmTasks( "grunt-mocha-istanbul" );
   grunt.loadNpmTasks( "grunt-mocha-test"     );
   grunt.loadNpmTasks( "grunt-move"           );
   grunt.loadNpmTasks( "grunt-shell"          );
+
+  // run lint and all tests by default before packaging
+  grunt.registerTask( "all",      [ "jshint", "clean", "mkdir", "mochaTest:test",
+                                    "mocha_istanbul:coverage", "jsdoc:api", "shell:npm_pack",
+                                    "copy:pkgfile_to_latest", "move:pkgfiles_to_dist" ]);
 
   // run lint and all tests by default before packaging
   grunt.registerTask( "build",    [ "jshint", "clean", "mkdir", "shell:npm_pack",
@@ -124,11 +139,10 @@ module.exports = function( grunt ) {
   // run lint and all tests by default before running the coverage
   grunt.registerTask( "coverage", [ "jshint", "clean", "mkdir", "mocha_istanbul:coverage" ]);
 
+  // run lint and tests for docs
+  grunt.registerTask( "docs",     [ "jshint", "clean", "mkdir", "jsdoc:api" ]);
+
   // run lint and tests for testing only (travis_ci)
   grunt.registerTask( "test",     [ "jshint", "clean", "mkdir", "mochaTest:test" ]);
 
-  // run lint and all tests by default before packaging
-  grunt.registerTask( "all",      [ "jshint", "clean", "mkdir", "mochaTest:test",
-                                    "mocha_istanbul:coverage", "shell:npm_pack", 
-                                    "copy:pkgfile_to_latest", "move:pkgfiles_to_dist" ]);
 };

@@ -12,6 +12,7 @@
     "all": "grunt all",
     "build": "grunt build",
     "coverage": "grunt coverage",
+    "docs": "grunt docs",
     "test": "grunt test"
   },
   "repository": {
@@ -39,6 +40,7 @@
     "grunt-contrib-clean": "^2.0.0",
     "grunt-contrib-copy": "^1.0.0",
     "grunt-contrib-jshint": "^2.1.0",
+    "grunt-jsdoc": "^2.4.1",
     "grunt-mkdir": "^1.0.0",
     "grunt-mocha-istanbul": "^5.0.2",
     "grunt-mocha-test": "^0.13.3",
