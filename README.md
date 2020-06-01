@@ -4,22 +4,48 @@
 [![Built with Grunt](https://cdn.gruntjs.com/builtwith.svg)](https://gruntjs.com/)
 
 # grunt-jsonfile
-use grunt to create and modify jsonfiles
+Use grunt to create and modify jsonfiles.  
+
+When running a complex make for various environments, which differ in type [test|production]
+and/or os targets, you might reach a point, where you need to provide json
+configuration files which differ in specific settings.  
+
+grunt-jsonfile offers the opportunity to:
+
+* provide json templates
+* customize templates by merging settings
+* customize templates by removing settings
+* deploy customized json files into custom (build) directories
+
+... all depending on the circumstances (environment and settings) of the current grunt build,
+which as well offers the opportunity to pass on settings from on build stage to a subsequent
+build stage.
+
+## content ##
+
+* [Getting started guide (see 'getting started' below)](README#getting_started)
+* [Testing grunt-jsonfile](docs/grunt#testing)
+* [Code coverage of tests for grunt-jsonfile](docs/grunt#code_coverage)
+* [Build grunt-jsonfile from scratch](docs/grunt#building)
+* [NPM integration of grunt-jsonfile](docs/grunt#npm_integration)
 
 ## getting started ##
 
-This guide assumes, that you are familiar with the use of npm and grunt.  
-After having installed grunt@>=1.0.4, you may install this plugin by the following command:
+This guide assumes, that you are familiar with the use of [npm](www.npmjs.com) and [grunt](gruntjs.com).  
+The plugin can be installed by the following command:
 
 <code>npm install grunt-jsonfiles --save-dev</code>
 
-Once the plugin has been installed, it may be loaded from within your gruntfile:
+Do note forget to install the peer dependencies.  
+Once installed, the plugin may be loaded from within your gruntfile:
 
 <code>grunt.loadNpmTasks( "jsonfiles" );</code>
 
-The task can be run now:
+Setup the task configuration as described below (see usage) and run the task:
 
 <code>grunt jsonfiles</code>
+
+Of cause, the task can be integrated into any complex build process.
 
 ## usage ##
 
