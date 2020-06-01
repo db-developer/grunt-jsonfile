@@ -12,6 +12,7 @@
     "all": "grunt all",
     "build": "grunt build",
     "coverage": "grunt coverage",
+    "docs": "grunt docs",
     "test": "grunt test"
   },
   "repository": {
