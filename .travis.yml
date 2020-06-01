@@ -9,9 +9,13 @@ node_js:
 
 # not recuired as of 2016(?)
 # before_script:
-#  - npm install grunt-cli -g
+#  - npm install -g grunt-cli
+
+install:
+  - npm install -g codecov
 
 script:
   - npm run test     # get the tests run before building
   - npm run coverage # get the coverage run before building
+  - codecov          # upload coverage reports to codecov.io
   - npm run build    # we have a build badge, so run the build
