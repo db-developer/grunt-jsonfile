@@ -23,11 +23,11 @@ build stage.
 
 ## content ##
 
-* [Getting started guide (see 'getting started' below)](README#getting_started)
-* [Testing grunt-jsonfile](docs/grunt#testing)
-* [Code coverage of tests for grunt-jsonfile](docs/grunt#code_coverage)
-* [Build grunt-jsonfile from scratch](docs/grunt#building)
-* [NPM integration of grunt-jsonfile](docs/grunt#npm_integration)
+* [Getting started guide (see 'getting started' below)](#getting-started)
+* [Testing grunt-jsonfile](docs/grunt.md#testing)
+* [Code coverage of tests for grunt-jsonfile](docs/grunt.md#code-coverage)
+* [Build grunt-jsonfile from scratch](docs/grunt.md#building)
+* [NPM integration of grunt-jsonfile](docs/grunt.md#npm_integration)
 
 ## getting started ##
 
