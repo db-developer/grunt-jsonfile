@@ -117,12 +117,18 @@ module.exports = function( grunt ) {
   grunt.loadNpmTasks( "grunt-move"           );
   grunt.loadNpmTasks( "grunt-shell"          );
 
-  //
+  // run lint and all tests by default before packaging
+  grunt.registerTask( "build",    [ "jshint", "clean", "mkdir", "shell:npm_pack",
+                                    "copy:pkgfile_to_latest", "move:pkgfiles_to_dist" ]);
+
+  // run lint and all tests by default before running the coverage
   grunt.registerTask( "coverage", [ "jshint", "clean", "mkdir", "mocha_istanbul:coverage" ]);
 
   // run lint and tests for testing only (travis_ci)
   grunt.registerTask( "test",     [ "jshint", "clean", "mkdir", "mochaTest:test" ]);
 
   // run lint and all tests by default before packaging
-  grunt.registerTask( "default",  [ "jshint", "clean", "mkdir", "shell:npm_pack", "copy:pkgfile_to_latest", "move:pkgfiles_to_dist" ]);
+  grunt.registerTask( "all",      [ "jshint", "clean", "mkdir", "mochaTest:test",
+                                    "mocha_istanbul:coverage", "shell:npm_pack", 
+                                    "copy:pkgfile_to_latest", "move:pkgfiles_to_dist" ]);
 };

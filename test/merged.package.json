@@ -9,7 +9,8 @@
   },
   "main": "tasks/tasks.js",
   "scripts": {
-    "build": "grunt default",
+    "all": "grunt all",
+    "build": "grunt build",
     "coverage": "grunt coverage",
     "test": "grunt test"
   },
