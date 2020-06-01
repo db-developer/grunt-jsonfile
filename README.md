@@ -31,7 +31,7 @@ build stage.
 
 ## getting started ##
 
-This guide assumes, that you are familiar with the use of [npm](www.npmjs.com) and [grunt](gruntjs.com).  
+This guide assumes, that you are familiar with the use of [npm](https://npmjs.com "Homepage of npm") and [grunt](https://gruntjs.com "Homepage of grunt").  
 The plugin can be installed by the following command:
 
 <code>npm install grunt-jsonfiles --save-dev</code>
