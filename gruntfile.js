@@ -4,145 +4,57 @@
  */
 "use strict";
 
-const COVERAGE    = "coverage";
-const DIST        = "dist";
-const GRUNTFILE   = "gruntfile.js";
-const PACKAGEJSON = "package.json";
-const PKGJSONOPT  = "pkgjson";
-const REPORTS     = "reports";
-const TASKS       = "tasks";
+const path          = require( "path"            );
+const strings       = require( "./.conf/strings" );
 
+const env = {
+  BUILDDIR:     `${ strings.BUILD }`,
+  CONFDIR:      `${ strings.DOT   }${ strings.CONF }`,
+  COVERAGEDIR:  path.join( `${ strings.DIST  }`, `${ strings.COVERAGE }` ),
+  DOCSDIR:      `${ strings.DOCS  }`,
+  DISTDIR:      `${ strings.DIST  }`,
+  LIBDIR:       path.join( `${ strings.SRC   }`, `${ strings.LIB }`     ),
+  SCRITPSDIR:   path.join( `${ strings.SRC   }`, `${ strings.SCRIPTS }` ),
+  SRCDIR:       `${ strings.SRC   }`,
+  STRINGS:      strings,
+  TASKSDIR:     path.join( `${ strings.SRC   }`, `${ strings.TASKS }` ),
+  TESTDIR:      path.join( `${ strings.SRC   }`, `${ strings.TEST  }`, `${ strings.ANY }` )
+};
 
-const COVERAGEDIR = `${ DIST }/${ COVERAGE }`;
-const DISTDIR     = `${ DIST }`;
-const REPORTSDIR  = `${ DIST }/${ REPORTS }`;
-const TASKSDIR    = `${ TASKS }`;
+const GRUNTCONFDIR = path.join( process.cwd(), env.CONFDIR, strings.GRUNT );
 
 module.exports = function( grunt ) {
 
-  // set grunt options
-  grunt.option( PKGJSONOPT,  grunt.file.readJSON( PACKAGEJSON ));
-
-  const pkgname     = grunt.option( PKGJSONOPT ).name;
-  const pkgversion  = grunt.option( PKGJSONOPT ).version;
-  const pkgfilename = `${ pkgname }-${ pkgversion }.tgz`;
-
-  grunt.initConfig({
-
-    jshint: {
-      all: [
-        GRUNTFILE,
-        `${ TASKSDIR }/*.js`
-      ],
-      options: {
-        jshintrc: ".jshintrc"
-      }
-    }, // end of jshint
-
-    clean: {
-      coverage: {
-        src: [ `${ COVERAGEDIR }/` ]
-      },
-      reports: {
-        src: [ `${ REPORTSDIR }/` ]
-      },
-      dist: {
-        src: [ `${ DISTDIR }/` ]
-      }
-    }, // end of clean
-
-    copy: {
-      pkgfile_to_latest: {
-        src:  pkgfilename,
-        dest: `${ grunt.option( PKGJSONOPT ).name }-latest.tgz`
-      }
-    }, // end of copy
-
-    jsdoc: {
-      api: {
-        src: [ "tasks/*.js" ],
-        options: {
-          destination: "docs/api"
-        }
-      }
-    }, // end of jsdoc
-
-    mkdir: {
-      all: {
-        options: {
-          create: [ DISTDIR ]
-        }
-      }
-    }, // end of mkdir
-
-    mocha_istanbul: {
-      coverage: {
-        src: "test",
-        options: {
-          timeout: 20000,
-          "report-formats": "html",
-          print: "summary",
-          coverageFolder: COVERAGEDIR,
-          check: {
-            lines: 90,
-            statements: 90,
-            functions: 100,
-            branches: 80
-          }
-        }
-      }
-    }, // end of mocha_istanbul
-
-    mochaTest: {
-      test: {
-        options: {
-          reporter: "spec"
-        },
-        src: [ "test/**/*.spec.js" ]
-      }
-    }, // end of mochaTest
-
-    move: {
-      pkgfiles_to_dist: {
-        src:  "*.tgz",
-        dest: `${ DISTDIR }/`
-      }
-    }, // end of move
-
-    // create distributable package
-    shell: {
-      npm_pack: {
-        command: "npm pack"
-      }
-    }
-  }); // end of grunt.initConfig({ ... })
-
-  grunt.loadNpmTasks( "grunt-contrib-clean"  );
-  grunt.loadNpmTasks( "grunt-contrib-copy"   );
-  grunt.loadNpmTasks( "grunt-contrib-jshint" );
-  grunt.loadNpmTasks( "grunt-jsdoc"          );
-  grunt.loadNpmTasks( "grunt-mkdir"          );
-  grunt.loadNpmTasks( "grunt-mocha-istanbul" );
-  grunt.loadNpmTasks( "grunt-mocha-test"     );
-  grunt.loadNpmTasks( "grunt-move"           );
-  grunt.loadNpmTasks( "grunt-shell"          );
+  require( "load-grunt-config" )( grunt, { configPath: GRUNTCONFDIR, data: env });
+  require( "load-grunt-tasks"  )( grunt );
 
   // run lint and all tests by default before packaging
-  grunt.registerTask( "all",      [ "jshint", "clean", "mkdir", "mochaTest:test",
-                                    "mocha_istanbul:coverage", "jsdoc:api", "shell:npm_pack",
-                                    "copy:pkgfile_to_latest", "move:pkgfiles_to_dist" ]);
+  grunt.registerTask( strings.ALL,     [ strings.TEST, strings.BUILD,
+                                         "copy:deploy", "move:distribute" ]);
 
   // run lint and all tests by default before packaging
-  grunt.registerTask( "build",    [ "jshint", "clean", "mkdir", "shell:npm_pack",
-                                    "copy:pkgfile_to_latest", "move:pkgfiles_to_dist" ]);
+  grunt.registerTask( strings.BUILD,   [ strings.BUILDRO ]);
 
-  // run lint and all tests by default before running the coverage
-  grunt.registerTask( "coverage", [ "jshint", "clean", "mkdir", "mocha_istanbul:coverage" ]);
+  grunt.registerTask( strings.BUILDWP, [ strings.ESLINT, "clean:build", "mkdir", "copy:build",
+                                         "webpack:build", "shell:npm_pack" ]);
 
-  // run lint and tests for docs
-  grunt.registerTask( "docs",     [ "jshint", "clean", "mkdir", "jsdoc:api" ]);
+  grunt.registerTask( strings.BUILDRO, [ strings.ESLINT, "clean:build", "mkdir", "copy:build",
+                                         "rollup:build", "shell:npm_pack" ]);
 
-  // run lint and tests for testing only (travis_ci)
-  grunt.registerTask( "test",     [ "jshint", "clean", "mkdir", "mochaTest:test" ]);
+  // run coverage
+  grunt.registerTask( strings.COVERAGE, [ strings.ESLINT, strings.CLEAN, "mkdir", "copy:test",
+                                          "nyc_mocha" ]);
 
+  // run default
+  grunt.registerTask( strings.DEFAULT, [ strings.ALL ]);
+
+  // run deploy
+  grunt.registerTask( strings.DEPLOY,  [ strings.TEST, strings.BUILD, "copy:deploy" ]);
+
+  // run dist
+  grunt.registerTask( strings.DIST,    [ strings.TEST, strings.BUILD, "move:distribute" ]);
+
+  // run test
+  grunt.registerTask( strings.TEST,    [ strings.ESLINT, strings.CLEAN, "mkdir", "copy:test",
+                                         "nyc_mocha" ]);
 };

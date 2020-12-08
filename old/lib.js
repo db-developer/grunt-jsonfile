@@ -4,25 +4,6 @@
  */
 "use strict";
 
-/**
- *  Returns true if value is of type string.
- *
- *  @param    value {any}
- *  @Returns  true, if value is of type string; false otherwise.
- */
-function isString( value ) {
-  return ( typeof value === 'string' ) || ( value instanceof String );
-}
-
-/**
- *  Returns true if value is of type number.
- *
- *  @param    value {any}
- *  @Returns  true, if value is of type number; false otherwise.
- */
-function isNumber( value ) {
-  return ! isNaN( parseFloat( value )) && isFinite( value );
-}
 
 /**
  *  Load json template by name.
