@@ -1,16 +1,15 @@
+# grunt-jsonfile
+create, modify and distribute jsonfiles.  
+
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![codecov](https://codecov.io/gh/db-developer/grunt-jsonfile/branch/master/graph/badge.svg)](https://codecov.io/gh/db-developer/grunt-jsonfile)
-[![Custom badge](https://img.shields.io/endpoint?url=https%3A%2F%2Fraw.githubusercontent.com%2Fdb-developer%2Fgrunt-jsonfile%2Fmaster%2Fdocs%2Fapi%2Fjsdocs.json)](https://github.com/db-developer/grunt-jsonfile#grunt-jsonfile)
 [![jsdocs](https://codecov.io/gh/db-developer/grunt-jsonfile/branch/master/graph/badge.svg)](https://codecov.io/gh/db-developer/grunt-jsonfile)
 [![Build Status](https://travis-ci.com/db-developer/grunt-jsonfile.svg?branch=master)](https://travis-ci.com/db-developer/grunt-jsonfile)
 [![Built with Grunt](https://cdn.gruntjs.com/builtwith.svg)](https://gruntjs.com/)
 
-# grunt-jsonfile
-Use grunt to create and modify jsonfiles.  
-
-When running a complex make for various environments, which differ in type [test|production]
-and/or os targets, you might reach a point, where you need to provide json
-configuration files which differ in specific settings.  
+When running a complex make for various environments, types like [test|production]
+and/or os targets, you might need to provide json configuration files which differ
+in specific settings.  
 
 grunt-jsonfile offers the opportunity to:
 
@@ -18,10 +17,7 @@ grunt-jsonfile offers the opportunity to:
 * customize templates by merging settings
 * customize templates by removing settings
 * deploy customized json files into custom (build) directories
-
-... all depending on the circumstances (environment and settings) of the current grunt build,
-which as well offers the opportunity to pass on settings from on build stage to a subsequent
-build stage.
+* use the projects package.json file as template
 
 ## content ##
 
