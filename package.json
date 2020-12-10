@@ -26,7 +26,9 @@
     "tsconfig.json"
   ],
   "files": [
-    "tasks"
+    "docs",
+    "tasks",
+    "lib"
   ],
   "bugs": {
     "url": "https://github.com/db-developer/grunt-jsonfile/issues"
