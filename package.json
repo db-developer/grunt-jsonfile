@@ -32,9 +32,6 @@
     "url": "https://github.com/db-developer/grunt-jsonfile/issues"
   },
   "homepage": "https://github.com/db-developer/grunt-jsonfile#readme",
-  "peerDependencies": {
-    "grunt": ">=1.1.0"
-  },
   "devDependencies": {
     "@babel/core": "^7.0.0",
     "@rollup/plugin-commonjs": "^14.0.0",

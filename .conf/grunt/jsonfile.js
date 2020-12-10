@@ -37,6 +37,8 @@ module.exports = function ( grunt, options ) {
       }
     },
     target1: {
+      test: "value",
+      dest: "./src/test/tmp/target1.json"
     }
   }
 };

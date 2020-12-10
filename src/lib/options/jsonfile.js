@@ -12,8 +12,8 @@
 const _m       = { lib:   require( "../lib" ) };
 
 const _STRINGS = {
-  getOptions:             "getOptions",
-  getTemplateFromOptions: "getTemplateFromOptions"
+  GETOPTIONS:             "getOptions",
+  GETTEMPLATEFROMOPTIONS: "getTemplateFromOptions"
 };
 
 /**
@@ -36,6 +36,7 @@ function getOptions( grunt, task ) {
  */
 function getTemplateFromOptions( grunt, task, templatename ) {
   const options = getOptions( grunt, task );
+  /* istanbul ignore if */
   if ( ! options.templates ) { return null; }
 
   let template = options.templates[ templatename ];

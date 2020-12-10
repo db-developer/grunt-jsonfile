@@ -20,7 +20,7 @@ module.exports = function ( grunt, options ) {
             lines:        100,
             statements:   100
           },
-          excludes:       [ "**/*.spec.js" ],         // files and directories to exclude from coverage
+          excludes:       [ "gruntfile.js", ".conf/**/*.js", "src/test/**/*.js" ],
           requires:       [ "grunt-nyc-mocha/scripts/sourcemapsupport" ]
         },
         mocha: {

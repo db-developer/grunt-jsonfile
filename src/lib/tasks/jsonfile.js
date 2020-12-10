@@ -15,35 +15,38 @@ const _m = {
   lib:            require( "../lib" )
 };
 
-function _init_STRINGS() {
-  const executejsonfile = "executeJSONFile";
-  const missingproperty = "Missing property";
-
-  return {
-    ERROR_MSG_MISSING_OPTIONS:  `${ executejsonfile }: ${ missingproperty } 'options'.`,
-    EXECUTEJSONFILE:            `${ executejsonfile }`,
-    IGNORE:                     "ignore",
-    INHERIT:                    "inherit",
-    RUNTASKJSONFILE:            "runTaskJSONFile"
-  };
-}
-
-const _STRINGS = _init_STRINGS();
+const _STRINGS =  {
+  GETTEMPLATE:                "getTemplate",
+  MERGEVALUES:                "mergeValues",
+  RUNTASKJSONFILE:            "runTaskJSONFile",
+  SETVALUES:                  "setValues"
+};
 
 /**
  *  Load json template by reference specified in target configuration.
  *
- *  @param  grunt         {object}
- *  @param  taskoptions   {object}
- *  @param  targetconfig  {object}
+ *  @param  {grunt}       grunt
+ *  @param  {grunt.task}  task
+ *  @param  {object}      targetconfig
  */
-function getTemplate( grunt, taskoptions, targetconfig ) {
-  if ( ! targetconfig.template ) { return { }; }
+function getTemplate( grunt, task, targetconfig ) {
+  if (( ! targetconfig ) || ( ! targetconfig.template )) { return { }; }
   if ( _m.lib.isString( targetconfig.template )) {
-       let template = _m.jsonfileopts.getTemplateFromOptions( grunt, taskoptions, targetconfig.template );
+       let template = _m.jsonfileopts.getTemplateFromOptions( grunt, task, targetconfig.template );
        return ( template ) ? template : grunt.file.readJSON( targetconfig.template );
   }
   else { return targetconfig.template; }
+}
+
+/**
+ *  Set keys from container into target
+ *
+ *  @param  target    {object} a json object
+ *  @param  container {object} a json object which holds key value pairs, which
+ *                             are to be set to target.
+ */
+function setValues( target, container ) {
+  return Object.assign( target, container );
 }
 
 /**
@@ -57,24 +60,23 @@ function getTemplate( grunt, taskoptions, targetconfig ) {
  *                             are to be merged into target.
  */
 function mergeValues( target, container ) {
+  if ( ! target ) { return; }
+  container = container ? container : { };
   Object.keys( container ).forEach( function( key /* , index */) {
-    /* istanbul ignore else */
     if (( ! target[ key ]) ||
         ( _m.lib.isString( target[ key ]) ||
           _m.lib.isNumber( target[ key ]) ||
           Array.isArray( target[ key ])))  {
-          if ( container[ key ]) { target[ key ] = container[ key ]; }
+          if ( container[ key ] !== undefined ) { target[ key ] = container[ key ]; }
           else { delete target[ key ]; }
     }
-    else if (( target[ key ]) && ( container[ key ] === null )) { delete target[ key ]; }
+    else if (( target[ key ]) && ( container[ key ] === undefined )) { delete target[ key ]; }
     else if (( ! ( target[ key ] instanceof Function )) && ( ! ( container[ key ] instanceof Function ))) {
           mergeValues( target[ key ], container[ key ]);
     }
   });
+  return target;
 }
-
-
-let   TASKCONFIG = undefined;
 
 /**
  *  Return a promise for executing
@@ -82,29 +84,23 @@ let   TASKCONFIG = undefined;
  *
  *  @param  {grunt}       grunt the runtime 'instance' of grunt.
  *  @param  {grunt.task}  task  the current task
- *  @param  {Object}      options of current target.
  */
-function executeJSONFile( grunt, task, options ) {
-  // provide default configuration
-  if ( TASKCONFIG === undefined ) {
-       TASKCONFIG = grunt.config()[ _m.constants.TASKNAME_JSONFILE ] || { };
-  }
-
+function runTaskJSONFile( grunt, task ) {
   return new Promise(( resolve, reject ) => {
     try {
-      if ( ! options ) { throw new Error( _STRINGS.ERROR_MSG_MISSING_OPTIONS ); }
-      const targetconfig = task.data || { };
+      const targetconfig = task.data || /* istanbul ignore next */ { };
 
-      let jsontemplate = getTemplate( grunt, options, targetconfig );
-          jsontemplate = ( targetconfig && ( targetconfig.set )) ?
-                           Object.assign( jsontemplate, targetconfig.set ) : jsontemplate;
+      let   jsontemplate = getTemplate( grunt, task, targetconfig );
 
-      /* istanbul ignore else: not required/nothing to do for else */
+      if ( targetconfig && ( targetconfig.set )) {
+           setValues( jsontemplate, targetconfig.set );
+      }
+
       if ( targetconfig && ( targetconfig.merge )) {
            mergeValues( jsontemplate, targetconfig.merge );
       }
 
-      let destinations = targetconfig.dest || `${ task.target }.json`;
+      let destinations = targetconfig.dest || /* istanbul ignore next */ `${ task.target }.json`;
       if ( ! Array.isArray( destinations )) { destinations = [ destinations ]; }
       destinations.forEach( function( destfile ) {
         grunt.file.write( destfile, JSON.stringify( jsontemplate, null, 2 ));
@@ -118,23 +114,18 @@ function executeJSONFile( grunt, task, options ) {
   });
 }
 
-/**
- *  @return {Promise} ... required by callee to terminate async call (on "then")
- */
-function runTaskJSONFile( grunt, task ) {
-  let    promise = _m.jsonfileopts.getOptions( grunt, task );
-         promise = promise.then(( options ) => {
-                     return executeJSONFile( grunt, task, options );
-                   });
-  return promise;
-}
-
 /* eslint-disable */
 // Module exports:
-Object.defineProperty( module.exports, _STRINGS.EXECUTEJSONFILE,  {
-       value:    executeJSONFile,
+Object.defineProperty( module.exports, _STRINGS.GETTEMPLATE,      {
+       value:    getTemplate,
+       writable: false, enumerable: true, configurable: false });
+Object.defineProperty( module.exports, _STRINGS.MERGEVALUES,      {
+       value:    mergeValues,
        writable: false, enumerable: true, configurable: false });
 Object.defineProperty( module.exports, _STRINGS.RUNTASKJSONFILE,  {
        value:    runTaskJSONFile,
+       writable: false, enumerable: true, configurable: false });
+Object.defineProperty( module.exports, _STRINGS.SETVALUES,        {
+       value:    setValues,
        writable: false, enumerable: true, configurable: false });
 /* eslint-enable */

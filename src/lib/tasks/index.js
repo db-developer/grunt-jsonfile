@@ -9,13 +9,8 @@
  *//* eslint-disable-next-line */
 "use strict";
 
-const _m = {
-  jsonfile:         require( "./jsonfile" )
-};
-
-const _STRINGS = {
-  RUNTASKJSONFILE:  "runTaskJSONFile"
-};
+const _m        = { jsonfile:         require( "./jsonfile" ) };
+const _STRINGS  = { RUNTASKJSONFILE:  "runTaskJSONFile" };
 
 /* eslint-disable */
 // Module exports:
