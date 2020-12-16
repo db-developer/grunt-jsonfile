@@ -25,6 +25,7 @@ grunt-jsonfile offers the opportunity to:
 * [Code coverage of tests for grunt-jsonfile](docs/grunt.md#code-coverage)
 * [Build grunt-jsonfile from scratch](docs/grunt.md#building)
 * [NPM integration of grunt-jsonfile](docs/grunt.md#npm_integration)
+* [Frameworks used for testing, building, etc.](docs/frameworks.md)
 
 ## getting started ##
 
