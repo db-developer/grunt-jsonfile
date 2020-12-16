@@ -18,8 +18,9 @@ const env = {
   SRCDIR:       `${ strings.SRC   }`,
   STRINGS:      strings,
   TASKSDIR:     path.join( `${ strings.SRC   }`, `${ strings.TASKS }`   ),
+  TEMPLATEDIR:  path.join( `${ strings.SRC   }`, `${ strings.TEST  }`, `${ strings.TEMPLATE }` ),
   TESTDIR:      path.join( `${ strings.SRC   }`, `${ strings.TEST  }`, `${ strings.ANY }` ),
-  TMPDIR:       path.join( `${ strings.SRC   }`, `${ strings.TMPDIR  }` )
+  TMPDIR:       path.join( `${ strings.SRC   }`, `${ strings.TEST  }`, `${ strings.TMP }` )
 };
 
 const GRUNTCONFDIR = path.join( process.cwd(), env.CONFDIR, strings.GRUNT );

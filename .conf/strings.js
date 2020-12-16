@@ -11,6 +11,7 @@ module.exports = {
   BUILDRO:  "rollup_build",
   CLEAN:    "clean",
   CONF:     "conf",
+  COPY:     "copy",
   COVERAGE: "coverage",
   DEFAULT:  "default",
   DEPLOY:   "deploy",
@@ -23,6 +24,7 @@ module.exports = {
   SCRIPTS:  "scripts",
   SRC:      "src",
   TASKS:    "tasks",
+  TEMPLATE: "template",
   TEST:     "test",
   TMP:      "tmp"
 }

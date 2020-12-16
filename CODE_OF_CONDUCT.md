@@ -11,4 +11,4 @@ Wouldn't it be funny, if "Be Nice" had a scope?
 
 ## Enforcement
 
-Enforcement to "Be Nice" feels like an oxymoron, but ignorance and exclusion are valid concepts to deal with people who, despite of admonitions, insist on being rude.
+Enforcement to "Be Nice" feels like an oxymoron, but ignorance and exclusion are valid concepts to deal with those who, despite of admonitions, insist on being rude.
