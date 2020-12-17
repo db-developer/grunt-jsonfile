@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width">
+	<title>grunt-jsonfile Index</title>
+
+	<!--[if lt IE 9]>
+	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	<link type="text/css" rel="stylesheet" href="styles/sunlight.default.css">
+
+	<link type="text/css" rel="stylesheet" href="styles/site.slate.css">
+
+</head>
+
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top navbar-inverse">
+<div class="container">
+	<div class="navbar-header">
+		<a class="navbar-brand" href="index.html">grunt-jsonfile</a>
+		<button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#topNavigation">
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+        </button>
+	</div>
+	<div class="navbar-collapse collapse" id="topNavigation">
+		<ul class="nav navbar-nav">
+			
+			<li class="dropdown">
+				<a href="global.html" class="dropdown-toggle" data-toggle="dropdown">Global<b class="caret"></b></a>
+				<ul class="dropdown-menu ">
+					<li><a href="global.html#getOptions">getOptions</a></li><li><a href="global.html#getTemplate">getTemplate</a></li><li><a href="global.html#getTemplateFromOptions">getTemplateFromOptions</a></li><li><a href="global.html#isNumber">isNumber</a></li><li><a href="global.html#isString">isString</a></li><li><a href="global.html#mergeValues">mergeValues</a></li><li><a href="global.html#registerMultiTaskJSONFile">registerMultiTaskJSONFile</a></li><li><a href="global.html#runTaskJSONFile">runTaskJSONFile</a></li><li><a href="global.html#setValues">setValues</a></li>
+				</ul>
+			</li>
+			
+		</ul>
+        
+            <div class="col-sm-3 col-md-3">
+                <form class="navbar-form" role="search">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Search" name="q" id="search-input">
+                        <div class="input-group-btn">
+                            <button class="btn btn-default" id="search-submit"><i class="glyphicon glyphicon-search"></i></button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        
+	</div>
+
+</div>
+</div>
+
+
+<div class="container" id="toc-content">
+<div class="row">
+
+	
+	<div class="col-md-8">
+	
+		<div id="main">
+			
+
+	
+	
+
+
+
+
+
+
+
+
+
+
+
+	
+	
+
+
+
+
+
+    <section class="readme-section">
+        <article><h1>grunt-jsonfile</h1>
+<p>create, modify and distribute jsonfiles.</p>
+<p><a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License: MIT"></a><br>
+<a href="https://codecov.io/gh/db-developer/grunt-jsonfile"><img src="https://codecov.io/gh/db-developer/grunt-jsonfile/branch/master/graph/badge.svg" alt="codecov"></a><br>
+<a href="https://travis-ci.com/db-developer/grunt-jsonfile"><img src="https://travis-ci.com/db-developer/grunt-jsonfile.svg?branch=master" alt="Build Status"></a><br>
+<a href="https://gruntjs.com/"><img src="https://cdn.gruntjs.com/builtwith.svg" alt="Built with Grunt"></a></p>
+<p>When running a complex make for various environments, types like [test|production]<br>
+and/or os targets, you might need to provide json configuration files which differ<br>
+in specific settings.</p>
+<p>grunt-jsonfile offers the opportunity to:</p>
+<ul>
+<li>provide json templates</li>
+<li>customize templates by merging settings</li>
+<li>customize templates by removing settings</li>
+<li>deploy customized json files into custom (build) directories</li>
+<li>use the projects package.json file as template</li>
+</ul>
+<h2>content</h2>
+<ul>
+<li><a href="#getting-started">Getting started guide (see 'getting started' below)</a></li>
+<li><a href="docs/grunt.md#testing">Testing grunt-jsonfile</a></li>
+<li><a href="docs/grunt.md#code-coverage">Code coverage of tests for grunt-jsonfile</a></li>
+<li><a href="docs/grunt.md#building">Build grunt-jsonfile from scratch</a></li>
+<li><a href="docs/grunt.md#npm_integration">NPM integration of grunt-jsonfile</a></li>
+<li><a href="docs/frameworks.md">Frameworks used for testing, building, etc.</a></li>
+</ul>
+<h2>getting started</h2>
+<p>This guide assumes, that you are familiar with the use of <a href="https://npmjs.com" title="Homepage of npm">npm</a> and <a href="https://gruntjs.com" title="Homepage of grunt">grunt</a>.<br>
+The plugin can be installed by the following command:</p>
+<p><code>npm install grunt-jsonfiles --save-dev</code></p>
+<p>Do note forget to install the peer dependencies.<br>
+Once installed, the plugin may be loaded from within your gruntfile:</p>
+<p><code>grunt.loadNpmTasks( &quot;jsonfiles&quot; );</code></p>
+<p>Setup the task configuration as described below (see usage) and run the task:</p>
+<p><code>grunt jsonfiles</code></p>
+<p>Of cause, the task can be integrated into any complex build process.</p>
+<h2>usage</h2>
+<pre class="prettyprint source lang-javascript"><code>
+const BUILD = &quot;...some path&quot;;
+
+jsonfiles: {
+  target1: {
+    template: &quot;config/template.json&quot;, // no options - string value must address a json file
+    dest:     `${ BUILD }/file.json`,
+    set: {
+      pname1: &quot;value 5 replaced&quot;  // this will set pname1 to &quot;value 5 replaced&quot;
+    },
+    merge: {
+      aproperty: null             // this will remove aproperty from template
+    }
+  }
+}
+
+</code></pre>
+<pre class="prettyprint source lang-javascript"><code>
+const BUILD = &quot;...some path&quot;;
+
+jsonfiles: {
+  options: {
+    templates: {
+      &quot;templatename&quot;: &quot;config/template.json&quot;
+    }
+  },
+  target1: {
+    template: &quot;templatename&quot;,     // check options.templates[ &quot;templatename&quot; ]
+                                  //       a string must address a json file
+    dest:     `${ BUILD }/file.json`,
+    set: {
+      pname1: &quot;value 5 replaced&quot;  // this will set pname1 to &quot;value 5 replaced&quot;
+    },
+    merge: {
+      aproperty: null             // this will remove aproperty from template
+    }
+  }
+}
+
+</code></pre>
+<pre class="prettyprint source lang-javascript"><code>
+const BUILD = &quot;...some path&quot;;
+
+jsonfiles: {
+  options: {
+    templates: {
+      one: {
+        pname1:     5,
+        pname2:     true,
+        pname3:     &quot;value&quot;,
+        aproperty:  &quot;a aproperty will be deleted&quot;
+      }
+      two: {
+        foo:        &quot;foo&quot;
+      }
+    }
+  },
+  target1: {
+    template: &quot;one&quot;,              // check options.templates[ &quot;templatename&quot; ]
+                                  //       an object will be used as template
+    dest: [ `${ BUILD }/1/file.json`,
+            `${ BUILD }/2/file.json`,
+            `${ BUILD }/3/file.json` ], // ... write three times ...
+    set: {
+      pname1: &quot;value 5 replaced&quot;  // this will set pname1 to &quot;value 5 replaced&quot;
+    },
+    merge: {
+      aproperty: null             // this will remove aproperty from template
+    }
+  }
+}
+
+</code></pre></article>
+    </section>
+
+
+
+
+
+
+
+		</div>
+	</div>
+
+	<div class="clearfix"></div>
+
+	
+		<div class="col-md-3">
+			<div id="toc" class="col-md-3 hidden-xs hidden-sm hidden-md"></div>
+		</div>
+	
+
+</div>
+</div>
+
+
+    <div class="modal fade" id="searchResults">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">Search results</h4>
+          </div>
+          <div class="modal-body"></div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div>
+
+
+<footer>
+
+	<center>api docs grunt-jsonfile version 0.2.3</center>
+
+
+	<span class="copyright">
+	copyright © 2020 db.developer@gmx.de
+	</span>
+
+<span class="jsdoc-message">
+	Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.6</a>
+	
+	using the <a href="https://github.com/docstrap/docstrap">DocStrap template</a>.
+</span>
+</footer>
+
+<script src="scripts/docstrap.lib.js"></script>
+<script src="scripts/toc.js"></script>
+
+    <script type="text/javascript" src="scripts/fulltext-search-ui.js"></script>
+
+
+<script>
+$( function () {
+	$( "[id*='$']" ).each( function () {
+		var $this = $( this );
+
+		$this.attr( "id", $this.attr( "id" ).replace( "$", "__" ) );
+	} );
+
+	$( ".tutorial-section pre, .readme-section pre, pre.prettyprint.source" ).each( function () {
+		var $this = $( this );
+
+		var example = $this.find( "code" );
+		exampleText = example.html();
+		var lang = /{@lang (.*?)}/.exec( exampleText );
+		if ( lang && lang[1] ) {
+			exampleText = exampleText.replace( lang[0], "" );
+			example.html( exampleText );
+			lang = lang[1];
+		} else {
+			var langClassMatch = example.parent()[0].className.match(/lang\-(\S+)/);
+			lang = langClassMatch ? langClassMatch[1] : "javascript";
+		}
+
+		if ( lang ) {
+
+			$this
+			.addClass( "sunlight-highlight-" + lang )
+			.addClass( "linenums" )
+			.html( example.html() );
+
+		}
+	} );
+
+	Sunlight.highlightAll( {
+		lineNumbers : true,
+		showMenu : true,
+		enableDoclinks : true
+	} );
+
+	$.catchAnchorLinks( {
+        navbarOffset: 10
+	} );
+	$( "#toc" ).toc( {
+		anchorName  : function ( i, heading, prefix ) {
+			return $( heading ).attr( "id" ) || ( prefix + i );
+		},
+		selectors   : "#toc-content h1,#toc-content h2,#toc-content h3,#toc-content h4",
+		showAndHide : false,
+		smoothScrolling: true
+	} );
+
+	$( "#main span[id^='toc']" ).addClass( "toc-shim" );
+	$( '.dropdown-toggle' ).dropdown();
+
+    $( "table" ).each( function () {
+      var $this = $( this );
+      $this.addClass('table');
+    } );
+
+} );
+</script>
+
+
+
+<!--Navigation and Symbol Display-->
+
+
+<!--Google Analytics-->
+
+
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            SearcherDisplay.init();
+        });
+    </script>
+
+
+</body>
+</html>
