@@ -18,12 +18,12 @@
 </dd>
 </dl>
 
-<a name="getTemplate"></a>
+
+<br><a name="getTemplate"></a>
 
 ## getTemplate(grunt, task, targetconfig)
-Load json template by reference specified in target configuration.
+> Load json template by reference specified in target configuration.
 
-**Kind**: global function  
 
 | Param | Type |
 | --- | --- |
@@ -31,36 +31,36 @@ Load json template by reference specified in target configuration.
 | task | <code>grunt.task</code> | 
 | targetconfig | <code>object</code> | 
 
-<a name="setValues"></a>
+
+<br><a name="setValues"></a>
 
 ## setValues(target, container)
-Set keys from container into target
+> Set keys from container into target
 
-**Kind**: global function  
 
 | Param | Type | Description |
 | --- | --- | --- |
 | target | <code>object</code> | a json object |
 | container | <code>object</code> | a json object which holds key value pairs, which                             are to be set to target. |
 
-<a name="mergeValues"></a>
+
+<br><a name="mergeValues"></a>
 
 ## mergeValues(target, container)
-Merge keys from container into target. Keys which are set to null within container, will be deleted from target. Note: This is a "deep-deep" merge.
+> Merge keys from container into target. Keys which are set to null>  within container, will be deleted from target.> >  Note: This is a "deep-deep" merge.
 
-**Kind**: global function  
 
 | Param | Type | Description |
 | --- | --- | --- |
 | target | <code>object</code> | a json object |
 | container | <code>object</code> | a json object which holds key value pairs, which                             are to be merged into target. |
 
-<a name="runTaskJSONFile"></a>
+
+<br><a name="runTaskJSONFile"></a>
 
 ## runTaskJSONFile(grunt, task)
-Return a promise for executing   'node --[node opts] nyc --[nyc opts] mocha --[mocha opts]'
+> Return a promise for executing>    'node --[node opts] nyc --[nyc opts] mocha --[mocha opts]'
 
-**Kind**: global function  
 
 | Param | Type | Description |
 | --- | --- | --- |

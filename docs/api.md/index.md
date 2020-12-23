@@ -1,9 +1,9 @@
-<a name="registerMultiTaskJSONFile"></a>
+
+<br><a name="registerMultiTaskJSONFile"></a>
 
 ## registerMultiTaskJSONFile(grunt)
-Registers the 'jsonfile' multitask.
+> Registers the 'jsonfile' multitask.
 
-**Kind**: global function  
 
 | Param | Type |
 | --- | --- |

@@ -9,24 +9,24 @@
 </dd>
 </dl>
 
-<a name="getOptions"></a>
+
+<br><a name="getOptions"></a>
 
 ## getOptions(task) ⇒ <code>Object</code>
-Returns grunt task specific options for 'jsonfile'.
+> Returns grunt task specific options for 'jsonfile'.
 
-**Kind**: global function  
 **Returns**: <code>Object</code> - 'nyc_mocha' options for grunt task  
 
 | Param | Type |
 | --- | --- |
 | task | <code>grunt.task</code> | 
 
-<a name="getTemplateFromOptions"></a>
+
+<br><a name="getTemplateFromOptions"></a>
 
 ## getTemplateFromOptions(grunt, task, templatename)
-Load json template by name.
+> Load json template by name.
 
-**Kind**: global function  
 
 | Param | Type | Description |
 | --- | --- | --- |
