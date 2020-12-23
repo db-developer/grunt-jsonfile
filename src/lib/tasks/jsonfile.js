@@ -1,6 +1,9 @@
-/*
+/**
  *	tasks/jsonfile.js: grunt-jsonfile
  *
+ *  @module grunt-jsonfile/tasks/jsonfile
+ *
+ *//*
  *  © 2020, slashlib.org.
  *
  *  tasks/jsonfile.js  is distributed WITHOUT ANY WARRANTY; without even the
@@ -9,12 +12,20 @@
  *//* eslint-disable-next-line */
 "use strict";
 
+/**
+ *  Module initializer
+ *  @ignore
+ */
 const _m = {
   constants:      require( "../constants"        ),
   jsonfileopts:   require( "../options/jsonfile" ),
   lib:            require( "../lib" )
 };
 
+/**
+ *  Stringtable
+ *  @ignore
+ */
 const _STRINGS =  {
   GETTEMPLATE:                "getTemplate",
   MERGEVALUES:                "mergeValues",

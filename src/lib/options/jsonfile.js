@@ -1,6 +1,9 @@
-/*
+/**
  *	options/jsonfile.js: grunt-jsonfile
  *
+ *  @module grunt-jsonfile/options/jsonfile
+ *
+ *//*
  *  © 2020, slashlib.org.
  *
  *  options/jsonfile.js  is distributed WITHOUT ANY WARRANTY; without even the
@@ -9,8 +12,18 @@
  *//* eslint-disable-next-line */
 "use strict";
 
-const _m       = { lib:   require( "../lib" ) };
+/**
+ *  Module initializer
+ *  @ignore
+ */
+const _m = {
+  lib:   require( "../lib" )
+};
 
+/**
+ *  Stringtable
+ *  @ignore
+ */
 const _STRINGS = {
   GETOPTIONS:             "getOptions",
   GETTEMPLATEFROMOPTIONS: "getTemplateFromOptions"
@@ -19,6 +32,7 @@ const _STRINGS = {
 /**
  *  Returns grunt task specific options for 'jsonfile'.
  *
+ *  @param  {grunt}       grunt
  *  @param  {grunt.task}  task
  *
  *  @return {Object}  'nyc_mocha' options for grunt task

@@ -31,9 +31,9 @@
 		<ul class="nav navbar-nav">
 			
 			<li class="dropdown">
-				<a href="global.html" class="dropdown-toggle" data-toggle="dropdown">Global<b class="caret"></b></a>
+				<a href="modules.list.html" class="dropdown-toggle" data-toggle="dropdown">Modules<b class="caret"></b></a>
 				<ul class="dropdown-menu ">
-					<li><a href="global.html#getOptions">getOptions</a></li><li><a href="global.html#getTemplate">getTemplate</a></li><li><a href="global.html#getTemplateFromOptions">getTemplateFromOptions</a></li><li><a href="global.html#isNumber">isNumber</a></li><li><a href="global.html#isString">isString</a></li><li><a href="global.html#mergeValues">mergeValues</a></li><li><a href="global.html#registerMultiTaskJSONFile">registerMultiTaskJSONFile</a></li><li><a href="global.html#runTaskJSONFile">runTaskJSONFile</a></li><li><a href="global.html#setValues">setValues</a></li>
+					<li><a href="module-grunt-jsonfile.html">grunt-jsonfile</a></li><li><a href="module-grunt-jsonfile_constants.html">grunt-jsonfile/constants</a></li><li><a href="module-grunt-jsonfile_lib.html">grunt-jsonfile/lib</a></li><li><a href="module-grunt-jsonfile_options.html">grunt-jsonfile/options</a></li><li><a href="module-grunt-jsonfile_options_jsonfile.html">grunt-jsonfile/options/jsonfile</a></li><li><a href="module-grunt-jsonfile_tasks.html">grunt-jsonfile/tasks</a></li><li><a href="module-grunt-jsonfile_tasks_jsonfile.html">grunt-jsonfile/tasks/jsonfile</a></li>
 				</ul>
 			</li>
 			
@@ -70,9 +70,12 @@
 <section>
     <article>
         <pre
-            class="sunlight-highlight-javascript linenums">/*
+            class="sunlight-highlight-javascript linenums">/**
  *	lib.js: grunt-jsonfile
  *
+ *  @module grunt-jsonfile/lib
+ *
+ *//*
  *  © 2020, slashlib.org.
  *
  *  index.js  is distributed WITHOUT ANY WARRANTY; without even the implied
@@ -81,6 +84,10 @@
  *//* eslint-disable-next-line */
 "use strict";
 
+/**
+ *  Stringtable
+ *  @ignore
+ */
 const _STRINGS = {
   ISNUMBER:         "isNumber",
   ISSTRING:         "isString"
@@ -89,8 +96,8 @@ const _STRINGS = {
 /**
  *  Returns true if value is of type string.
  *
- *  @param    value {any}
- *  @Returns  true, if value is of type string; false otherwise.
+ *  @param    {any} value - To be tested for being a string.
+ *  @returns  true, if value is of type string; false otherwise.
  */
 function isString( value ) {
   return ( typeof value === 'string' ) || ( value instanceof String );
@@ -99,7 +106,7 @@ function isString( value ) {
 /**
  *  Returns true if value is of type number.
  *
- *  @param    value {any}
+ *  @param    {any} value - To be tested for being a number.
  *  @Returns  true, if value is of type number; false otherwise.
  */
 function isNumber( value ) {
@@ -153,7 +160,7 @@ Object.defineProperty( module.exports, _STRINGS.ISSTRING,       {
 
 <footer>
 
-	<center>api docs grunt-jsonfile version 0.2.3</center>
+	<center>api docs grunt-jsonfile version 0.2.4</center>
 
 
 	<span class="copyright">

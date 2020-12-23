@@ -1,7 +1,13 @@
 
-<br><a name="registerMultiTaskJSONFile"></a>
+<br><a name="module_grunt-jsonfile"></a>
 
-## registerMultiTaskJSONFile(grunt)
+## grunt-jsonfile
+> index.js: grunt-jsonfile
+
+
+<br><a name="module_grunt-jsonfile..registerMultiTaskJSONFile"></a>
+
+### grunt-jsonfile~registerMultiTaskJSONFile(grunt)
 > Registers the 'jsonfile' multitask.
 
 

@@ -26,6 +26,7 @@ grunt-jsonfile offers the opportunity to:
 * [Build grunt-jsonfile from scratch](docs/grunt.md#building)
 * [NPM integration of grunt-jsonfile](docs/grunt.md#npm_integration)
 * [Frameworks used for testing, building, etc.](docs/frameworks.md)
+* [API of package grunt-jsonfile](docs/api.index.md)
 
 ## getting started ##
 

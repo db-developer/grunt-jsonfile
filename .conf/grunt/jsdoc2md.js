@@ -7,12 +7,13 @@
 module.exports = function ( grunt, options ) {
   return {
     api: {
+      src:      `${ options.LIBDIR }/**/*.js`,
+      dest:     `${ options.APIDIR }/`,
       options: {
         index: {
           dest: `${ options.APIDIR }/../api.index.md`
         }
-      },
-      files: [{ src: `${ options.LIBDIR }/**/*.js`, dest: `${ options.APIDIR }/` }]
+      }
     }
   };
 };

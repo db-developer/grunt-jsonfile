@@ -31,9 +31,9 @@
 		<ul class="nav navbar-nav">
 			
 			<li class="dropdown">
-				<a href="global.html" class="dropdown-toggle" data-toggle="dropdown">Global<b class="caret"></b></a>
+				<a href="modules.list.html" class="dropdown-toggle" data-toggle="dropdown">Modules<b class="caret"></b></a>
 				<ul class="dropdown-menu ">
-					<li><a href="global.html#getOptions">getOptions</a></li><li><a href="global.html#getTemplate">getTemplate</a></li><li><a href="global.html#getTemplateFromOptions">getTemplateFromOptions</a></li><li><a href="global.html#isNumber">isNumber</a></li><li><a href="global.html#isString">isString</a></li><li><a href="global.html#mergeValues">mergeValues</a></li><li><a href="global.html#registerMultiTaskJSONFile">registerMultiTaskJSONFile</a></li><li><a href="global.html#runTaskJSONFile">runTaskJSONFile</a></li><li><a href="global.html#setValues">setValues</a></li>
+					<li><a href="module-grunt-jsonfile.html">grunt-jsonfile</a></li><li><a href="module-grunt-jsonfile_constants.html">grunt-jsonfile/constants</a></li><li><a href="module-grunt-jsonfile_lib.html">grunt-jsonfile/lib</a></li><li><a href="module-grunt-jsonfile_options.html">grunt-jsonfile/options</a></li><li><a href="module-grunt-jsonfile_options_jsonfile.html">grunt-jsonfile/options/jsonfile</a></li><li><a href="module-grunt-jsonfile_tasks.html">grunt-jsonfile/tasks</a></li><li><a href="module-grunt-jsonfile_tasks_jsonfile.html">grunt-jsonfile/tasks/jsonfile</a></li>
 				</ul>
 			</li>
 			
@@ -70,9 +70,12 @@
 <section>
     <article>
         <pre
-            class="sunlight-highlight-javascript linenums">/*
+            class="sunlight-highlight-javascript linenums">/**
  *	index.js: grunt-jsonfile
  *
+ *  @module grunt-jsonfile
+ *
+ *//*
  *  © 2020, slashlib.org.
  *
  *  index.js  is distributed WITHOUT ANY WARRANTY; without even the implied
@@ -81,11 +84,19 @@
  *//* eslint-disable-next-line */
 "use strict";
 
+/**
+ *  Module initializer
+ *  @ignore
+ */
 const _m = {
   const:    require( "./constants" ),
   tasks:    require( "./tasks"     )
 }
 
+/**
+ *  Stringtable
+ *  @ignore
+ */
 const _STRINGS = {
   REGISTERMULTITASKJSONFILE:  "registerMultiTaskJSONFile"
 }
@@ -149,7 +160,7 @@ Object.defineProperty( module.exports, _STRINGS.REGISTERMULTITASKJSONFILE, {
 
 <footer>
 
-	<center>api docs grunt-jsonfile version 0.2.3</center>
+	<center>api docs grunt-jsonfile version 0.2.4</center>
 
 
 	<span class="copyright">

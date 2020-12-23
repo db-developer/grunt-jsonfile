@@ -1,9 +1,20 @@
 /**
+ *	constants.js: grunt-jsonfile
+ *
+ *  @module grunt-jsonfile/constants
+ *
+ *//*
  *  © 2020, db-developer.
- *  Licensed under the MIT license.
+ *
+ *  constants.js  is distributed  WITHOUT  ANY WARRANTY;  without  even  the
+ *  implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  */
 "use strict";
 
+/**
+ *  Stringtable
+ *  @ignore
+ */
 const _STRINGS = {
   PROPERTY_TASKNAME_JSONFILE:   "TASKNAME_JSONFILE",
   PROPERTY_TASKDESC_JSONFILE:   "TASKDESCRIPTION_JSONFILE",

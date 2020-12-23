@@ -1,30 +1,31 @@
-## Functions
 
-<dl>
-<dt><a href="#getOptions">getOptions(task)</a> ⇒ <code>Object</code></dt>
-<dd><p>Returns grunt task specific options for &#39;jsonfile&#39;.</p>
-</dd>
-<dt><a href="#getTemplateFromOptions">getTemplateFromOptions(grunt, task, templatename)</a></dt>
-<dd><p>Load json template by name.</p>
-</dd>
-</dl>
+<br><a name="module_grunt-jsonfile/options/jsonfile"></a>
+
+## grunt-jsonfile/options/jsonfile
+> options/jsonfile.js: grunt-jsonfile
 
 
-<br><a name="getOptions"></a>
+* [grunt-jsonfile/options/jsonfile](#module_grunt-jsonfile/options/jsonfile)
+    * [~getOptions(grunt, task)](#module_grunt-jsonfile/options/jsonfile..getOptions) ⇒ <code>Object</code>
+    * [~getTemplateFromOptions(grunt, task, templatename)](#module_grunt-jsonfile/options/jsonfile..getTemplateFromOptions)
 
-## getOptions(task) ⇒ <code>Object</code>
+
+<br><a name="module_grunt-jsonfile/options/jsonfile..getOptions"></a>
+
+### grunt-jsonfile/options/jsonfile~getOptions(grunt, task) ⇒ <code>Object</code>
 > Returns grunt task specific options for 'jsonfile'.
 
 **Returns**: <code>Object</code> - 'nyc_mocha' options for grunt task  
 
 | Param | Type |
 | --- | --- |
+| grunt | <code>grunt</code> | 
 | task | <code>grunt.task</code> | 
 
 
-<br><a name="getTemplateFromOptions"></a>
+<br><a name="module_grunt-jsonfile/options/jsonfile..getTemplateFromOptions"></a>
 
-## getTemplateFromOptions(grunt, task, templatename)
+### grunt-jsonfile/options/jsonfile~getTemplateFromOptions(grunt, task, templatename)
 > Load json template by name.
 
 

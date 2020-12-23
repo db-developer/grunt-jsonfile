@@ -4,7 +4,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width">
-	<title>grunt-jsonfile Source: options/jsonfile.js</title>
+	<title>grunt-jsonfile Source: options/index.js</title>
 
 	<!--[if lt IE 9]>
 	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -65,21 +65,21 @@
 		<div id="main">
 			
 
-		<h1 class="page-title">Source: options/jsonfile.js</h1>
+		<h1 class="page-title">Source: options/index.js</h1>
     
 <section>
     <article>
         <pre
             class="sunlight-highlight-javascript linenums">/**
- *	options/jsonfile.js: grunt-jsonfile
+ *	index.js: grunt-jsonfile/options
  *
- *  @module grunt-jsonfile/options/jsonfile
+ *  @module grunt-jsonfile/options
  *
  *//*
  *  © 2020, slashlib.org.
  *
- *  options/jsonfile.js  is distributed WITHOUT ANY WARRANTY; without even the
- *  implied  warranty of MERCHANTABILITY or  FITNESS FOR A PARTICULAR PURPOSE.
+ *  options/index.js  is distributed WITHOUT ANY WARRANTY;  without even the
+ *  implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  *
  *//* eslint-disable-next-line */
 "use strict";
@@ -89,7 +89,7 @@
  *  @ignore
  */
 const _m = {
-  lib:   require( "../lib" )
+  jsonfile:   require( "./jsonfile" )
 };
 
 /**
@@ -97,48 +97,13 @@ const _m = {
  *  @ignore
  */
 const _STRINGS = {
-  GETOPTIONS:             "getOptions",
-  GETTEMPLATEFROMOPTIONS: "getTemplateFromOptions"
+  GETOPTIONS: "getOptions"
 };
-
-/**
- *  Returns grunt task specific options for 'jsonfile'.
- *
- *  @param  {grunt}       grunt
- *  @param  {grunt.task}  task
- *
- *  @return {Object}  'nyc_mocha' options for grunt task
- */
-function getOptions( grunt, task ) {
-  return task.options();
-}
-
-/**
- *  Load json template by name.
- *
- *  @param  {grunt}       grunt
- *  @param  {grunt.task}  task
- *  @param  {string}      templatename to load.
- */
-function getTemplateFromOptions( grunt, task, templatename ) {
-  const options = getOptions( grunt, task );
-  /* istanbul ignore if */
-  if ( ! options.templates ) { return null; }
-
-  let template = options.templates[ templatename ];
-  if ( _m.lib.isString( template )) {
-       return grunt.file.readJSON( template );
-  }
-  else { return template; }
-}
 
 /* eslint-disable */
 // Module exports:
-Object.defineProperty( module.exports, _STRINGS.GETTEMPLATEFROMOPTIONS, {
-       value:    getTemplateFromOptions,
-       writable: false, enumerable: true, configurable: false });
-Object.defineProperty( module.exports, _STRINGS.GETOPTIONS,     {
-       value:    getOptions,
+Object.defineProperty( module.exports, _STRINGS.GETOPTIONS, {
+       value:    _m.jsonfile.getOptions,
        writable: false, enumerable: true, configurable: false });
 /* eslint-enable */
 </pre>

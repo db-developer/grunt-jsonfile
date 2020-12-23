@@ -4,7 +4,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width">
-	<title>grunt-jsonfile Source: options/jsonfile.js</title>
+	<title>grunt-jsonfile Module: grunt-jsonfile/options/jsonfile</title>
 
 	<!--[if lt IE 9]>
 	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -60,91 +60,476 @@
 <div class="row">
 
 	
-	<div class="col-md-12">
+	<div class="col-md-8">
 	
 		<div id="main">
 			
 
-		<h1 class="page-title">Source: options/jsonfile.js</h1>
-    
+	<h1 class="page-title">Module: grunt-jsonfile/options/jsonfile</h1>
 <section>
-    <article>
-        <pre
-            class="sunlight-highlight-javascript linenums">/**
- *	options/jsonfile.js: grunt-jsonfile
- *
- *  @module grunt-jsonfile/options/jsonfile
- *
- *//*
- *  © 2020, slashlib.org.
- *
- *  options/jsonfile.js  is distributed WITHOUT ANY WARRANTY; without even the
- *  implied  warranty of MERCHANTABILITY or  FITNESS FOR A PARTICULAR PURPOSE.
- *
- *//* eslint-disable-next-line */
-"use strict";
 
-/**
- *  Module initializer
- *  @ignore
- */
-const _m = {
-  lib:   require( "../lib" )
-};
+<header>
+    
+</header>
 
-/**
- *  Stringtable
- *  @ignore
- */
-const _STRINGS = {
-  GETOPTIONS:             "getOptions",
-  GETTEMPLATEFROMOPTIONS: "getTemplateFromOptions"
-};
 
-/**
- *  Returns grunt task specific options for 'jsonfile'.
- *
- *  @param  {grunt}       grunt
- *  @param  {grunt.task}  task
- *
- *  @return {Object}  'nyc_mocha' options for grunt task
- */
-function getOptions( grunt, task ) {
-  return task.options();
-}
+<article>
+    <div class="container-overview">
+    
+        
+            <div class="description"><p>options/jsonfile.js: grunt-jsonfile</p></div>
+        
 
-/**
- *  Load json template by name.
- *
- *  @param  {grunt}       grunt
- *  @param  {grunt.task}  task
- *  @param  {string}      templatename to load.
- */
-function getTemplateFromOptions( grunt, task, templatename ) {
-  const options = getOptions( grunt, task );
-  /* istanbul ignore if */
-  if ( ! options.templates ) { return null; }
+        
+<dl class="details">
+    
 
-  let template = options.templates[ templatename ];
-  if ( _m.lib.isString( template )) {
-       return grunt.file.readJSON( template );
-  }
-  else { return template; }
-}
+	
 
-/* eslint-disable */
-// Module exports:
-Object.defineProperty( module.exports, _STRINGS.GETTEMPLATEFROMOPTIONS, {
-       value:    getTemplateFromOptions,
-       writable: false, enumerable: true, configurable: false });
-Object.defineProperty( module.exports, _STRINGS.GETOPTIONS,     {
-       value:    getOptions,
-       writable: false, enumerable: true, configurable: false });
-/* eslint-enable */
-</pre>
-    </article>
+	
+
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+	<dt class="tag-source method-doc-label method-doc-details-label">Source:</dt>
+	<dd class="tag-source">
+		<ul class="dummy">
+			<li>
+				<a href="options_jsonfile.js.html">options/jsonfile.js</a>,
+				 <a href="options_jsonfile.js.html#sunlight-1-line-1">line 1</a>
+			</li>
+		</ul>
+	</dd>
+	
+
+	
+
+	
+
+	
+</dl>
+
+
+        
+    
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <h3 class="subsection-title">Methods</h3>
+
+        <dl>
+            
+<hr>
+<dt>
+    <h4 class="name" id="~getOptions"><span class="type-signature">&lt;inner> </span>getOptions(grunt, task)</h4>
+    
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        <p>Returns grunt task specific options for 'jsonfile'.</p>
+    </div>
+    
+
+    
+
+    
+
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params table table-striped">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>grunt</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">grunt</span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>task</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">grunt.task</span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+	<dt class="tag-source method-doc-label method-doc-details-label">Source:</dt>
+	<dd class="tag-source">
+		<ul class="dummy">
+			<li>
+				<a href="options_jsonfile.js.html">options/jsonfile.js</a>,
+				 <a href="options_jsonfile.js.html#sunlight-1-line-40">line 40</a>
+			</li>
+		</ul>
+	</dd>
+	
+
+	
+
+	
+
+	
+</dl>
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <h5>Returns:</h5>
+    
+            
+<div class="param-desc">
+    <p>'nyc_mocha' options for grunt task</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Object</span>
+
+
+
+    </dd>
+</dl>
+
+
+        
+
+    
+</dd>
+
+        
+            
+<hr>
+<dt>
+    <h4 class="name" id="~getTemplateFromOptions"><span class="type-signature">&lt;inner> </span>getTemplateFromOptions(grunt, task, templatename)</h4>
+    
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        <p>Load json template by name.</p>
+    </div>
+    
+
+    
+
+    
+
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params table table-striped">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>grunt</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">grunt</span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>task</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">grunt.task</span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>templatename</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>to load.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+	<dt class="tag-source method-doc-label method-doc-details-label">Source:</dt>
+	<dd class="tag-source">
+		<ul class="dummy">
+			<li>
+				<a href="options_jsonfile.js.html">options/jsonfile.js</a>,
+				 <a href="options_jsonfile.js.html#sunlight-1-line-51">line 51</a>
+			</li>
+		</ul>
+	</dd>
+	
+
+	
+
+	
+
+	
+</dl>
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dd>
+
+        </dl>
+    
+
+    
+
+    
+</article>
+
 </section>
-
 
 
 
@@ -154,6 +539,10 @@ Object.defineProperty( module.exports, _STRINGS.GETOPTIONS,     {
 
 	<div class="clearfix"></div>
 
+	
+		<div class="col-md-3">
+			<div id="toc" class="col-md-3 hidden-xs hidden-sm hidden-md"></div>
+		</div>
 	
 
 </div>

@@ -1,6 +1,9 @@
-/*
- *	options/index.js: grunt-jsonfile
+/**
+ *	index.js: grunt-jsonfile/options
  *
+ *  @module grunt-jsonfile/options
+ *
+ *//*
  *  © 2020, slashlib.org.
  *
  *  options/index.js  is distributed WITHOUT ANY WARRANTY;  without even the
@@ -9,8 +12,21 @@
  *//* eslint-disable-next-line */
 "use strict";
 
-const _m        = { jsonfile:   require( "./jsonfile" ) };
-const _STRINGS  = { GETOPTIONS: "getOptions" };
+/**
+ *  Module initializer
+ *  @ignore
+ */
+const _m = {
+  jsonfile:   require( "./jsonfile" )
+};
+
+/**
+ *  Stringtable
+ *  @ignore
+ */
+const _STRINGS = {
+  GETOPTIONS: "getOptions"
+};
 
 /* eslint-disable */
 // Module exports:

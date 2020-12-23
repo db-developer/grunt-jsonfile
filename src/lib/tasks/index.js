@@ -1,6 +1,9 @@
-/*
- *	tasks/index.js: grunt-jsonfile
+/**
+ *	index.js: grunt-jsonfile/tasks
  *
+ *  @module grunt-jsonfile/tasks
+ *
+ *//*
  *  © 2020, slashlib.org.
  *
  *  tasks/index.js  is  distributed  WITHOUT ANY WARRANTY;  without even the
@@ -9,8 +12,21 @@
  *//* eslint-disable-next-line */
 "use strict";
 
-const _m        = { jsonfile:         require( "./jsonfile" ) };
-const _STRINGS  = { RUNTASKJSONFILE:  "runTaskJSONFile" };
+/**
+ *  Module initializer
+ *  @ignore
+ */
+const _m = {
+  jsonfile:         require( "./jsonfile" )
+};
+
+/**
+ *  Stringtable
+ *  @ignore
+ */
+const _STRINGS = {
+  RUNTASKJSONFILE:  "runTaskJSONFile"
+};
 
 /* eslint-disable */
 // Module exports:

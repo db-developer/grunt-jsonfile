@@ -1,6 +1,9 @@
-/*
+/**
  *	index.js: grunt-jsonfile
  *
+ *  @module grunt-jsonfile
+ *
+ *//*
  *  © 2020, slashlib.org.
  *
  *  index.js  is distributed WITHOUT ANY WARRANTY; without even the implied
@@ -9,11 +12,19 @@
  *//* eslint-disable-next-line */
 "use strict";
 
+/**
+ *  Module initializer
+ *  @ignore
+ */
 const _m = {
   const:    require( "./constants" ),
   tasks:    require( "./tasks"     )
 }
 
+/**
+ *  Stringtable
+ *  @ignore
+ */
 const _STRINGS = {
   REGISTERMULTITASKJSONFILE:  "registerMultiTaskJSONFile"
 }

@@ -1,6 +1,9 @@
-/*
+/**
  *	lib.js: grunt-jsonfile
  *
+ *  @module grunt-jsonfile/lib
+ *
+ *//*
  *  © 2020, slashlib.org.
  *
  *  index.js  is distributed WITHOUT ANY WARRANTY; without even the implied
@@ -9,6 +12,10 @@
  *//* eslint-disable-next-line */
 "use strict";
 
+/**
+ *  Stringtable
+ *  @ignore
+ */
 const _STRINGS = {
   ISNUMBER:         "isNumber",
   ISSTRING:         "isString"
@@ -17,8 +24,8 @@ const _STRINGS = {
 /**
  *  Returns true if value is of type string.
  *
- *  @param    value {any}
- *  @Returns  true, if value is of type string; false otherwise.
+ *  @param    {any} value - To be tested for being a string.
+ *  @returns  true, if value is of type string; false otherwise.
  */
 function isString( value ) {
   return ( typeof value === 'string' ) || ( value instanceof String );
@@ -27,7 +34,7 @@ function isString( value ) {
 /**
  *  Returns true if value is of type number.
  *
- *  @param    value {any}
+ *  @param    {any} value - To be tested for being a number.
  *  @Returns  true, if value is of type number; false otherwise.
  */
 function isNumber( value ) {
