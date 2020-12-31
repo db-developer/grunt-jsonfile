@@ -1,0 +1,30 @@
+{
+  "name": "grunt-jsonfile",
+  "version": "0.2.5",
+  "description": "create, modify and distribute jsonfiles.  ",
+  "author": "Dirk Brenckmann <db.developer@gmx.de>",
+  "license": "MIT",
+  "engines": {
+    "node": ">=10.15.1"
+  },
+  "main": "tasks/tasks.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/db-developer/grunt-jsonfile.git"
+  },
+  "keywords": [
+    "grunt",
+    "json",
+    "package.json",
+    "tsconfig.json"
+  ],
+  "files": [
+    "docs",
+    "tasks",
+    "lib"
+  ],
+  "bugs": {
+    "url": "https://github.com/db-developer/grunt-jsonfile/issues"
+  },
+  "homepage": "https://github.com/db-developer/grunt-jsonfile#readme"
+}

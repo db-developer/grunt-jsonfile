@@ -15,7 +15,6 @@ const env = {
   DOCSDIR:      `${ strings.DOCS  }`,
   DISTDIR:      `${ strings.DIST  }`,
   LIBDIR:       path.join( `${ strings.SRC  }`, `${ strings.LIB }`     ),
-  SCRITPSDIR:   path.join( `${ strings.SRC  }`, `${ strings.SCRIPTS }` ),
   SRCDIR:       `${ strings.SRC   }`,
   STRINGS:      strings,
   TASKSDIR:     path.join( `${ strings.SRC  }`, `${ strings.TASKS }`   ),
@@ -33,36 +32,30 @@ module.exports = function( grunt ) {
 
   // run lint and all tests by default before packaging
   grunt.registerTask( strings.ALL,     [ strings.TEST, strings.DOCS, strings.BUILD,
-                                         "copy:deploy", "move:distribute" ]);
+                                         strings.DIST, strings.DEPLOY ]);
 
   // run lint and all tests by default before packaging
-  grunt.registerTask( strings.BUILD,   [ strings.BUILDRO ]);
+  grunt.registerTask( strings.BUILD,   [ strings.ESLINT,   `${ strings.CLEAN }:build`,
+                                         strings.MKDIR,    `${ strings.COPY  }:build`,
+                                         strings.BUILDRO ]);
 
-  grunt.registerTask( strings.BUILDWP, [ strings.ESLINT, "clean:build", strings.MKDIR, "copy:build",
-                                         "webpack:build", "shell:npm_pack" ]);
+  grunt.registerTask( strings.BUILDWP, [ strings.WEBPACK, "shell:npm_pack" ]);
 
-  grunt.registerTask( strings.BUILDRO, [ strings.ESLINT, "clean:build", strings.MKDIR, "copy:build",
-                                         "rollup:build", "shell:npm_pack" ]);
-
-  // run coverage
-  grunt.registerTask( strings.COVERAGE, [ strings.ESLINT, strings.CLEAN, strings.MKDIR, "copy:test",
-                                          "nyc_mocha" ]);
+  grunt.registerTask( strings.BUILDRO, [ strings.ROLLUP,  "shell:npm_pack" ]);
 
   // run default
   grunt.registerTask( strings.DEFAULT, [ strings.ALL ]);
 
-  // run deploy
-  grunt.registerTask( strings.DEPLOY,  [ strings.TEST, strings.BUILD, strings.DOCS,
-                                         "copy:deploy" ]);
+  // run deploy: copy current.tgz from dist to _packages_ current.tgz & latest.tgz
+  grunt.registerTask( strings.DEPLOY,  [ `${ strings.COPY }:deploy` ]);
 
-  // run dist
-  grunt.registerTask( strings.DIST,    [ strings.TEST, strings.BUILD, strings.DOCS,
-                                         "move:distribute" ]);
+  // run dist: clean dist and move current.tgz from cwd to dist
+  grunt.registerTask( strings.DIST,    [ `${ strings.CLEAN }:dist`, strings.MOVE ]);
 
   // run docs
-  grunt.registerTask( strings.DOCS,    [ strings.ESLINT, strings.JSDOC, strings.JSDOC2MD ]);
+  grunt.registerTask( strings.DOCS,    [ strings.ESLINT, strings.JSDOC2MD ]);
 
   // run test
-  grunt.registerTask( strings.TEST,    [ strings.ESLINT, strings.CLEAN, strings.MKDIR, "copy:test",
-                                         "nyc_mocha" ]);
+  grunt.registerTask( strings.TEST,    [ strings.ESLINT, strings.CLEAN, strings.MKDIR,
+                                         `${ strings.COPY }:test`, strings.NYCMOCHA ]);
 };

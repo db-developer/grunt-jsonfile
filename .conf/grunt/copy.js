@@ -16,7 +16,12 @@ module.exports  = function ( grunt, options ) {
     build: {
       files: [
         {
-          src:      [ "*.md", "package.json", "LICENSE" ],
+          src:      [ "*.md", "LICENSE" ],
+          dest:     `${ options.BUILDDIR }/`
+        },{
+          expand:   true,
+          cwd:      `${ options.SRCDIR }`,
+          src:      [ "package.json" ],
           dest:     `${ options.BUILDDIR }/`
         },{
           expand:   true,
@@ -29,34 +34,17 @@ module.exports  = function ( grunt, options ) {
           filter:   "isFile",
           src:      [ `${ options.TASKSDIR }/*.js` ],
           dest:     `${ options.BUILDDIR }/tasks/`
-        },{
-          expand: true,
-          flatten: true,
-          filter: "isFile",
-          src:  [ `${ options.SCRITPSDIR }/*.js` ],
-          dest: `${ options.BUILDDIR }/scripts/`
         }
       ]
     },
     deploy: {
       files: [
         {
-          src:  `${ PACKAGE }-${ VERSION }.${ TGZ }`,
+          src:  `${ options.DISTDIR }/${ PACKAGE }-${ VERSION }.${ TGZ }`,
           dest: `${ PKGSDIR }/${ PACKAGE }-${ VERSION }.${ TGZ }`
         }, {
-          src:  `${ PACKAGE }-${ VERSION }.${ TGZ }`,
+          src:  `${ options.DISTDIR }/${ PACKAGE }-${ VERSION }.${ TGZ }`,
           dest: `${ PKGSDIR }/${ PACKAGE }-${ LATEST  }.${ TGZ }`
-        }
-      ]
-    },
-    distribute: {
-      files: [
-        {
-          src:  `${ PACKAGE }-${ VERSION }.${ TGZ }`,
-          dest: `${ options.DISTDIR }/${ PACKAGE }-${ VERSION }.${ TGZ }`
-        }, {
-          src:  `${ PACKAGE }-${ VERSION }.${ TGZ }`,
-          dest: `${ options.DISTDIR }/${ PACKAGE }-${ LATEST  }.${ TGZ }`
         }
       ]
     },

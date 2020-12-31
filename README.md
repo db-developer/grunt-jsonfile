@@ -1,10 +1,13 @@
 # grunt-jsonfile
 create, modify and distribute jsonfiles.  
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![npm version](https://img.shields.io/npm/v/grunt-jsonfile?color=blue)](https://www.npmjs.com/package/grunt-jsonfile)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+[![jsdoc](https://img.shields.io/static/v1?label=jsdoc&message=%20api%20&color=blue)](https://jsdoc.app/)
+[![Built with Grunt](https://cdn.gruntjs.com/builtwith.svg)](https://gruntjs.com/)
 [![codecov](https://codecov.io/gh/db-developer/grunt-jsonfile/branch/master/graph/badge.svg)](https://codecov.io/gh/db-developer/grunt-jsonfile)
 [![Build Status](https://travis-ci.com/db-developer/grunt-jsonfile.svg?branch=master)](https://travis-ci.com/db-developer/grunt-jsonfile)
-[![Built with Grunt](https://cdn.gruntjs.com/builtwith.svg)](https://gruntjs.com/)
+[![dependencies](https://david-dm.org/db-developer/grunt-jsonfile.svg)](https://david-dm.org/)
 
 When running a complex make for various environments, types like [test|production]
 and/or os targets, you might need to provide json configuration files which differ
@@ -20,13 +23,17 @@ grunt-jsonfile offers the opportunity to:
 
 ## content ##
 
-* [Getting started guide (see 'getting started' below)](#getting-started)
-* [Testing grunt-jsonfile](docs/grunt.md#testing)
-* [Code coverage of tests for grunt-jsonfile](docs/grunt.md#code-coverage)
-* [Build grunt-jsonfile from scratch](docs/grunt.md#building)
-* [NPM integration of grunt-jsonfile](docs/grunt.md#npm_integration)
-* [Frameworks used for testing, building, etc.](docs/frameworks.md)
-* [API of package grunt-jsonfile](docs/api.index.md)
+* Usage (see further down this page)
+  * [Getting started guide](#getting-started)
+  * [Usage and examples](#usage)
+
+* Developers
+  * [Testing grunt-jsonfile](docs/grunt.md#testing)
+  * [Code coverage of tests for grunt-jsonfile](docs/grunt.md#code-coverage)
+  * [Build grunt-jsonfile from scratch](docs/grunt.md#building)
+  * [NPM integration of grunt-jsonfile](docs/grunt.md#npm_integration)
+  * [Frameworks used for testing, building, etc.](docs/frameworks.md)
+  * [API of package grunt-jsonfile](docs/api.index.md)
 
 ## getting started ##
 
