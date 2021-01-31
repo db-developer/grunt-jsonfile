@@ -60,6 +60,7 @@ module.exports = function( grunt ) {
   grunt.registerTask( strings.DOCS,    [ strings.ESLINT, strings.JSDOC2MD ]);
 
   // run test
-  grunt.registerTask( strings.TEST,    [ strings.ESLINT, strings.CLEAN, strings.MKDIR,
-                                         `${ strings.COPY }:test`, strings.NYCMOCHA ]);
+  grunt.registerTask( strings.TEST,    [ strings.CHKOUTDATED, strings.ESLINT, strings.CLEAN,
+                                         strings.MKDIR,       `${ strings.COPY }:test`,
+                                         strings.NYCMOCHA ]);
 };
