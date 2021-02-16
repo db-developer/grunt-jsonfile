@@ -124,6 +124,7 @@ const expect    = require( "expect.js" );
           expect(() => { jsonfile.mergeValues( target, container ); }).not.to.throwException();
           expect( JSON.stringify( target ) === JSON.stringify( container )).to.be.ok();
       });
+// =>
       it( "should be callable with 'target' { 4 } and 'container' { 5 }", () => {
           const target    = { hurz: { }};
           const container = { hurz: undefined };
@@ -141,6 +142,82 @@ const expect    = require( "expect.js" );
           const container = { hurz: "blubb"  };
           expect(() => { jsonfile.mergeValues( target, container ); }).not.to.throwException();
           // expect( JSON.stringify( target ) === JSON.stringify( container )).to.be.ok();
+      });
+    });
+    describe( "Testing function 'updateValues' of module 'tasks/jsonfile'", () => {
+      it( "should be callable without arguments", () => {
+          expect(() => { jsonfile.updateValues(); }).not.to.throwException();
+      });
+      it( "should be callable with 'target' { } and 'container' {undefined|null}", () => {
+          const target    = { };
+          const container = undefined;
+          expect(() => { jsonfile.updateValues( target, undefined ); }).not.to.throwException();
+          expect(() => { jsonfile.updateValues( target, null      ); }).not.to.throwException();
+      });
+      it( "should be callable with 'target' { } and 'container' {undefined|null}", () => {
+          const target    = { };
+          const container = { dummy: "value" };
+          expect(() => { jsonfile.updateValues( target, container ); }).not.to.throwException();
+      });
+      it( "should be callable with 'target' { 1 } and 'container' { 1 }", () => {
+          const target    = { hurz: "to be deleted" };
+          const container = { hurz: false, dummy: "value" };
+          expect(() => { jsonfile.updateValues( target, container ); }).not.to.throwException();
+          expect( JSON.stringify( target ) === JSON.stringify({ hurz: false })).to.be.ok();
+      });
+      it( "should be callable with 'target' { 1 } and 'container' { 2 }", () => {
+          const target    = { hurz: "to be deleted" };
+          const container = { hurz: null, dummy: "value" };
+          expect(() => { jsonfile.updateValues( target, container ); }).not.to.throwException();
+          expect( JSON.stringify( target ) === JSON.stringify({ hurz: null })).to.be.ok();
+      });
+      it( "should be callable with 'target' { 1 } and 'container' { 3 }", () => {
+          const target    = { hurz: "to be deleted" };
+          const container = { hurz: undefined, dummy: "value" };
+          expect(() => { jsonfile.updateValues( target, container ); }).not.to.throwException();
+          expect( JSON.stringify( target ) === JSON.stringify({ hurz: undefined })).to.be.ok();
+      });
+      it( "should be callable with 'target' { 2 } and 'container' { 3 }", () => {
+          const target    = { hurz: 4 };
+          const container = { hurz: 9 };
+          expect(() => { jsonfile.updateValues( target, container ); }).not.to.throwException();
+          expect( JSON.stringify( target ) === JSON.stringify( container )).to.be.ok();
+      });
+      it( "should be callable with 'target' { 3 } and 'container' { 4 }", () => {
+          const target    = { hurz: [ 1, 2, 3 ]};
+          const container = { hurz: [ 3, 4, 5 ]};
+          expect(() => { jsonfile.updateValues( target, container ); }).not.to.throwException();
+          expect( JSON.stringify( target ) === JSON.stringify( container )).to.be.ok();
+      });
+      it( "should be callable with 'target' { 3 } and 'container' { 4 }", () => {
+          const target    = { hurz: "test" };
+          const container = { hurz: new String( "fun" ) };
+          expect(() => { jsonfile.updateValues( target, container ); }).not.to.throwException();
+          expect( JSON.stringify( target ) === JSON.stringify( container )).to.be.ok();
+      });
+      it( "should be callable with 'target' { 3 } and 'container' { 4 }", () => {
+          const target    = { hurz: "test" };
+          const container = { hurz: function( ) { return 3; }};
+          expect(() => { jsonfile.updateValues( target, container ); }).not.to.throwException();
+          expect( JSON.stringify( target ) === JSON.stringify( container )).to.be.ok();
+      });
+      it( "should be callable with 'target' { 3 } and 'container' { 4 }", () => {
+          const target    = { hurz: "test" };
+          const container = { hurz: new Date() };
+          expect(() => { jsonfile.updateValues( target, container ); }).not.to.throwException();
+          expect( JSON.stringify( target ) === JSON.stringify( container )).to.be.ok();
+      });
+      it( "should be callable with 'target' { 3 } and 'container' { 4 }", () => {
+          const target    = { hurz: "test" };
+          const container = { hurz: { blubb: "blubb" }};
+          expect(() => { jsonfile.updateValues( target, container ); }).not.to.throwException();
+          expect( JSON.stringify( target ) === JSON.stringify( container )).to.be.ok();
+      });
+      it( "should be callable with 'target' { 3 } and 'container' { 4 }", () => {
+          const target    = { hurz: { blubb: "test"  }};
+          const container = { hurz: { blubb: "blubb" }};
+          expect(() => { jsonfile.updateValues( target, container ); }).not.to.throwException();
+          expect( JSON.stringify( target ) === JSON.stringify( container )).to.be.ok();
       });
     });
     describe( "Testing function 'runTaskJSONFile' of module 'tasks/jsonfile'", () => {
@@ -206,6 +283,20 @@ const expect    = require( "expect.js" );
           env.task.data.set   = undefined;
           env.task.data.merge = undefined;
           env.task.data.dest  = [ "./src/test/tmp/target2.json", "./src/test/tmp/target3.json" ];
+          expect(() => { jsonfile.runTaskJSONFile( env.grunt, env.task )
+                                 .then(( value ) => {
+                                         // console.log( value )
+                                         expect( JSON.stringify( value ) === JSON.stringify({ })).to.be.ok();
+                                         done();
+                                  })
+                                 .catch(( error ) => { done( error ); });
+                       }).not.to.throwException(( error ) => { console.log( error )});
+      });
+      it( "should be callable with argument grunt {grunt}, task {grunt.task} and task.data.dest {Array} and resolve", ( done ) => {
+          env.task.data.set    = undefined;
+          env.task.data.merge  = undefined;
+          env.task.data.update = { fun: "value" };
+          env.task.data.dest   = [ "./src/test/tmp/target2.json", "./src/test/tmp/target3.json" ];
           expect(() => { jsonfile.runTaskJSONFile( env.grunt, env.task )
                                  .then(( value ) => {
                                          // console.log( value )

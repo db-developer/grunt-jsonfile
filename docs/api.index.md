@@ -16,4 +16,5 @@
     * [~getTemplate(grunt, task, targetconfig)](api.md/tasks/jsonfile.md#module_grunt-jsonfile/tasks/jsonfile..getTemplate)
     * [~setValues(target, container)](api.md/tasks/jsonfile.md#module_grunt-jsonfile/tasks/jsonfile..setValues)
     * [~mergeValues(target, container)](api.md/tasks/jsonfile.md#module_grunt-jsonfile/tasks/jsonfile..mergeValues)
+    * [~updateValues(target, container)](api.md/tasks/jsonfile.md#module_grunt-jsonfile/tasks/jsonfile..updateValues)
     * [~runTaskJSONFile(grunt, task)](api.md/tasks/jsonfile.md#module_grunt-jsonfile/tasks/jsonfile..runTaskJSONFile)

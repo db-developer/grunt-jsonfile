@@ -9,6 +9,7 @@
     * [~getTemplate(grunt, task, targetconfig)](#module_grunt-jsonfile/tasks/jsonfile..getTemplate)
     * [~setValues(target, container)](#module_grunt-jsonfile/tasks/jsonfile..setValues)
     * [~mergeValues(target, container)](#module_grunt-jsonfile/tasks/jsonfile..mergeValues)
+    * [~updateValues(target, container)](#module_grunt-jsonfile/tasks/jsonfile..updateValues)
     * [~runTaskJSONFile(grunt, task)](#module_grunt-jsonfile/tasks/jsonfile..runTaskJSONFile)
 
 
@@ -47,6 +48,18 @@
 | --- | --- | --- |
 | target | <code>object</code> | a json object |
 | container | <code>object</code> | a json object which holds key value pairs, which                             are to be merged into target. |
+
+
+<br><a name="module_grunt-jsonfile/tasks/jsonfile..updateValues"></a>
+
+### grunt-jsonfile/tasks/jsonfile~updateValues(target, container)
+> Update keys from container into target. Keys which are set to null>  within container, will be deleted from target. Keys that do not exist>  in the target will not be set.> >  Note: This is a "deep-deep" merge.
+
+
+| Param | Type | Description |
+| --- | --- | --- |
+| target | <code>object</code> | a json object |
+| container | <code>object</code> | a json object which holds key value pairs,                             which will be used to update the target. |
 
 
 <br><a name="module_grunt-jsonfile/tasks/jsonfile..runTaskJSONFile"></a>

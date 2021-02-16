@@ -30,7 +30,10 @@ const _STRINGS =  {
   GETTEMPLATE:                "getTemplate",
   MERGEVALUES:                "mergeValues",
   RUNTASKJSONFILE:            "runTaskJSONFile",
-  SETVALUES:                  "setValues"
+  SETVALUES:                  "setValues",
+  TYPE_OBJECT:                "object",
+  TYPE_FUNCTION:              "function",
+  UPDATEVALUES:               "updateValues"
 };
 
 /**
@@ -90,6 +93,48 @@ function mergeValues( target, container ) {
 }
 
 /**
+ *  Update keys from container into target. Keys which are set to null
+ *  within container, will be deleted from target. Keys that do not exist
+ *  in the target will not be set.
+ *
+ *  Note: This is a "deep-deep" merge.
+ *
+ *  @param  target    {object} a json object
+ *  @param  container {object} a json object which holds key value pairs,
+ *                             which will be used to update the target.
+ */
+function updateValues( target, container ) {
+  if ( ! target ) { return; }
+  container = container ? container : { };
+  Object.keys( container ).forEach( function( key /* , index */) {
+    if (( target[ key ] === null      ) ||
+        ( target[ key ] === undefined )) {
+          return;
+    }
+    else if ( container[ key ] === undefined ) {
+              target[ key ] = undefined;
+    }
+    else if ( container[ key ] === null ) {
+              target[ key ] = null;
+    }
+    else if ( typeof( container[ key ]) === _STRINGS.TYPE_OBJECT ) {
+         if (( ! Array.isArray(     container[ key ]    )) &&
+             ( ! ( container[ key ] instanceof String   )) &&
+             ( typeof( container[ key ]) !== _STRINGS.TYPE_FUNCTION ) &&
+             ( ! ( container[ key ] instanceof Date     ))) {
+               if ( typeof( target[ key ]) === _STRINGS.TYPE_OBJECT ) {
+                    updateValues( target[ key ], container[ key ]);
+               }
+               else target[ key ] = container[ key ];
+         }
+         else  target[ key ] = container[ key ];
+    }
+    else target[ key ] = container[ key ];
+  });
+  return target;
+}
+
+/**
  *  Return a promise for executing
  *    'node --[node opts] nyc --[nyc opts] mocha --[mocha opts]'
  *
@@ -111,6 +156,10 @@ function runTaskJSONFile( grunt, task ) {
            mergeValues( jsontemplate, targetconfig.merge );
       }
 
+      if ( targetconfig && ( targetconfig.update )) {
+           updateValues( jsontemplate, targetconfig.update );
+      }
+
       let destinations = targetconfig.dest || /* istanbul ignore next */ `${ task.target }.json`;
       if ( ! Array.isArray( destinations )) { destinations = [ destinations ]; }
       destinations.forEach( function( destfile ) {
@@ -125,18 +174,19 @@ function runTaskJSONFile( grunt, task ) {
   });
 }
 
-/* eslint-disable */
 // Module exports:
-Object.defineProperty( module.exports, _STRINGS.GETTEMPLATE,      {
+Object.defineProperty( module.exports, _STRINGS.GETTEMPLATE,  {
        value:    getTemplate,
        writable: false, enumerable: true, configurable: false });
-Object.defineProperty( module.exports, _STRINGS.MERGEVALUES,      {
+Object.defineProperty( module.exports, _STRINGS.MERGEVALUES,  {
        value:    mergeValues,
        writable: false, enumerable: true, configurable: false });
 Object.defineProperty( module.exports, _STRINGS.RUNTASKJSONFILE,  {
        value:    runTaskJSONFile,
        writable: false, enumerable: true, configurable: false });
-Object.defineProperty( module.exports, _STRINGS.SETVALUES,        {
+Object.defineProperty( module.exports, _STRINGS.SETVALUES,    {
        value:    setValues,
        writable: false, enumerable: true, configurable: false });
-/* eslint-enable */
+Object.defineProperty( module.exports, _STRINGS.UPDATEVALUES, {
+       value:    updateValues,
+       writable: false, enumerable: true, configurable: false });
