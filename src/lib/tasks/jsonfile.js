@@ -161,9 +161,10 @@ function runTaskJSONFile( grunt, task ) {
       }
 
       let destinations = targetconfig.dest || /* istanbul ignore next */ `${ task.target }.json`;
+      let eof          = _m.jsonfileopts.getEOF( grunt, task );
       if ( ! Array.isArray( destinations )) { destinations = [ destinations ]; }
       destinations.forEach( function( destfile ) {
-        grunt.file.write( destfile, JSON.stringify( jsontemplate, null, 2 ));
+        grunt.file.write( destfile, JSON.stringify( jsontemplate, null, 2 ) + eof );
       });
 
       // return modified jsontemplate for _testing_ purposes.

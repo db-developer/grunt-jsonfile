@@ -37,6 +37,8 @@ grunt-jsonfile offers the opportunity to:
   * [Frameworks used for testing, building, etc.](docs/frameworks.md)
   * [API of package grunt-jsonfile](docs/api.index.md)
 
+[Changelog](docs/changelog.md)
+
 ## getting started ##
 
 This guide assumes, that you are familiar with the use of [npm](https://npmjs.com "Homepage of npm") and [grunt](https://gruntjs.com "Homepage of grunt").  
@@ -56,6 +58,20 @@ Setup the task configuration as described below (see usage) and run the task:
 Of cause, the task can be integrated into any complex build process.
 
 ## usage ##
+
+### defining an EOF ###
+
+If option.EOF is truthy, jsonfiles will close with an operating system specifc
+EOL (end of line)
+
+```javascript
+
+const jsonfile = {
+  options: {
+    EOF: true
+  }
+};
+```
 
 ### defining templates ###
 

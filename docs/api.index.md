@@ -9,7 +9,9 @@
     * [~isNumber(value)](api.md/lib.md#module_grunt-jsonfile/lib..isNumber) ⇒
 * [grunt-jsonfile/options](api.md/options/index.md#module_grunt-jsonfile/options)
 * [grunt-jsonfile/options/jsonfile](api.md/options/jsonfile.md#module_grunt-jsonfile/options/jsonfile)
+    * [~_OPTIONS](api.md/options/jsonfile.md#module_grunt-jsonfile/options/jsonfile.._OPTIONS)
     * [~getOptions(grunt, task)](api.md/options/jsonfile.md#module_grunt-jsonfile/options/jsonfile..getOptions) ⇒ <code>Object</code>
+    * [~getEOF(grunt, task)](api.md/options/jsonfile.md#module_grunt-jsonfile/options/jsonfile..getEOF) ⇒ <code>string</code>
     * [~getTemplateFromOptions(grunt, task, templatename)](api.md/options/jsonfile.md#module_grunt-jsonfile/options/jsonfile..getTemplateFromOptions)
 * [grunt-jsonfile/tasks](api.md/tasks/index.md#module_grunt-jsonfile/tasks)
 * [grunt-jsonfile/tasks/jsonfile](api.md/tasks/jsonfile.md#module_grunt-jsonfile/tasks/jsonfile)

@@ -17,7 +17,8 @@
  *  @ignore
  */
 const _m = {
-  lib:   require( "../lib" )
+  os:     require( "os" ),
+  lib:    require( "../lib" )
 };
 
 /**
@@ -25,9 +26,16 @@ const _m = {
  *  @ignore
  */
 const _STRINGS = {
+  EMPTY:                  "",
+  GETEOF:                 "getEOF",
   GETOPTIONS:             "getOptions",
   GETTEMPLATEFROMOPTIONS: "getTemplateFromOptions"
 };
+
+/**
+ *  Default options
+ */
+const _OPTIONS = { EOF: false }
 
 /**
  *  Returns grunt task specific options for 'jsonfile'.
@@ -38,7 +46,23 @@ const _STRINGS = {
  *  @return {Object}  'nyc_mocha' options for grunt task
  */
 function getOptions( grunt, task ) {
-  return task.options();
+  const  options   = JSON.parse( JSON.stringify( _OPTIONS ));
+  return Object.assign( options, task.options());
+}
+
+/**
+ *  Returns EOF (end of file) from options.
+ *  If options.EOF is true this function will return the os
+ *  specific EOL.
+ *
+ *  @param  {grunt}       grunt
+ *  @param  {grunt.task}  task
+ *
+ *  @return {string} wich either is an empty string or an 'end of line'
+ */
+function getEOF( grunt, task ) {
+  const options = getOptions( grunt, task );
+  return options.EOF ? _m.os.EOL : /*istanbul ignore next */ _STRINGS.EMPTY;
 }
 
 /**
@@ -62,6 +86,9 @@ function getTemplateFromOptions( grunt, task, templatename ) {
 
 /* eslint-disable */
 // Module exports:
+Object.defineProperty( module.exports, _STRINGS.GETEOF, {
+       value:    getEOF,
+       writable: false, enumerable: true, configurable: false });
 Object.defineProperty( module.exports, _STRINGS.GETTEMPLATEFROMOPTIONS, {
        value:    getTemplateFromOptions,
        writable: false, enumerable: true, configurable: false });

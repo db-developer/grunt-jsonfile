@@ -21,6 +21,7 @@ const promise = new Promise(( resolve, reject ) => {
 module.exports.env = promise.catch(( error ) => { grunt.fail.warn( "custom error in 00.00.constants.js" )});
 
 module.exports.options = {
+  EOF:  true,
   templates: {
     one:  "package.json",
     two: {

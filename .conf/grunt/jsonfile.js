@@ -7,6 +7,7 @@
 module.exports = function ( grunt, options ) {
   return {
     options: {
+      EOF:  true,
       templates: {
         one:  "package.json",
         two: {

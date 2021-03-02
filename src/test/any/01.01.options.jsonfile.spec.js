@@ -1,6 +1,7 @@
 /**
  *  © 2020, slashlib.org.
  */
+const os        = require( "os" );
 const expect    = require( "expect.js" );
 
 ( async function() {
@@ -17,7 +18,12 @@ const expect    = require( "expect.js" );
           expect( jsonfile.getOptions ).not.to.be( null       );
           expect( jsonfile.getOptions ).to.be.a(   "function" );
       });
-      it( "Function 'getOptions' should exist", () => {
+      it( "Function 'getEOF' should exist", () => {
+          expect( jsonfile.getEOF ).not.to.be( undefined  );
+          expect( jsonfile.getEOF ).not.to.be( null       );
+          expect( jsonfile.getEOF ).to.be.a(   "function" );
+      });
+      it( "Function 'getTemplateFromOptions' should exist", () => {
           expect( jsonfile.getTemplateFromOptions ).not.to.be( undefined  );
           expect( jsonfile.getTemplateFromOptions ).not.to.be( null       );
           expect( jsonfile.getTemplateFromOptions ).to.be.a(   "function" );
@@ -33,6 +39,18 @@ const expect    = require( "expect.js" );
           expect(() => { jsonfile.getOptions( env.grunt, env.task ); }).not.to.throwException();
           // console.log( jsonfile.getOptions( env.grunt, env.task ));
           expect( JSON.stringify( jsonfile.getOptions( env.grunt, env.task )) === JSON.stringify( options )).to.be.ok();
+      });
+    });
+    describe( "Testing function 'getEOF' of module 'options/jsonfile'", () => {
+      it( "should not be callable without arguments", () => {
+          expect(() => { jsonfile.getEOF(); }).to.throwException(( error ) => {
+            expect( error ).to.be.an( Error );
+          });
+      });
+      it( "should be callable with arguments 'grunt' and 'task'", () => {
+          expect(() => { jsonfile.getEOF( env.grunt, env.task ); }).not.to.throwException();
+          // console.log( jsonfile.getEOF( env.grunt, env.task ));
+          expect( jsonfile.getEOF( env.grunt, env.task ) === os.EOL ).to.be.ok();
       });
     });
     describe( "Testing function 'getTemplateFromOptions' of module 'options/jsonfile'", () => {
