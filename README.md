@@ -37,7 +37,7 @@ grunt-jsonfile offers the opportunity to:
   * [Frameworks used for testing, building, etc.](docs/frameworks.md)
   * [API of package grunt-jsonfile](docs/api.index.md)
 
-[Changelog](docs/changelog.md)
+[Changelog](CHANGELOG.md)
 
 ## getting started ##
 
