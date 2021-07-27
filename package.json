@@ -1,6 +1,6 @@
 {
   "name": "grunt-jsonfile",
-  "version": "0.2.9",
+  "version": "1.0.0",
   "description": "create, modify and distribute jsonfiles.  ",
   "author": "Dirk Brenckmann <db.developer@gmx.de>",
   "license": "MIT",
@@ -21,6 +21,7 @@
   },
   "keywords": [
     "grunt",
+    "gruntplugin",
     "json",
     "package.json",
     "tsconfig.json"
@@ -33,14 +34,14 @@
   "bugs": {
     "url": "https://github.com/db-developer/grunt-jsonfile/issues"
   },
-  "homepage": "https://github.com/db-developer/grunt-jsonfile#readme",
+  "homepage": "https://www.slashlib.org/?page_id=504",
   "devDependencies": {
     "@babel/core": "^7.14.8",
     "@rollup/plugin-commonjs": "^19.0.2",
     "babel-loader": "^8.2.2",
     "expect.js": "^0.3.1",
     "grunt": "^1.4.1",
-    "grunt-check-outdated": "^0.0.4",
+    "grunt-check-outdated": "^1.0.0",
     "grunt-contrib-clean": "^2.0.0",
     "grunt-contrib-copy": "^1.0.0",
     "grunt-eslint": "^23.0.0",

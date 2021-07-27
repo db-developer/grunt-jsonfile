@@ -1,6 +1,6 @@
 {
   "name": "grunt-jsonfile",
-  "version": "0.2.9",
+  "version": "1.0.0",
   "description": "create, modify and distribute jsonfiles.",
   "author": "Dirk Brenckmann <db.developer@gmx.de>",
   "license": "MIT",
@@ -14,6 +14,7 @@
   },
   "keywords": [
     "grunt",
+    "gruntplugin",
     "json",
     "package.json",
     "tsconfig.json"
@@ -26,5 +27,5 @@
   "bugs": {
     "url": "https://github.com/db-developer/grunt-jsonfile/issues"
   },
-  "homepage": "https://github.com/db-developer/grunt-jsonfile#readme"
+  "homepage": "https://www.slashlib.org/?page_id=504"
 }
