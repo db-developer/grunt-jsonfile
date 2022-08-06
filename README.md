@@ -8,7 +8,7 @@ use objects or json files as template, to create, modify and distribute jsonfile
 [![Built with Grunt](https://cdn.gruntjs.com/builtwith.svg)](https://gruntjs.com/)
 [![codecov](https://codecov.io/gh/db-developer/grunt-jsonfile/branch/master/graph/badge.svg)](https://codecov.io/gh/db-developer/grunt-jsonfile)
 [![Build Status](https://travis-ci.com/db-developer/grunt-jsonfile.svg?branch=master)](https://travis-ci.com/db-developer/grunt-jsonfile)
-[![dependencies](https://david-dm.org/db-developer/grunt-jsonfile.svg)](https://david-dm.org/)
+[![dependencies](https://img.shields.io/librariesio/release/npm/grunt-jsonfile)](https://libraries.io/)
 
 When running a complex make for various environments, types like [test|production]
 and/or os targets, json configuration files might be required, which differ in
