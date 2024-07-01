@@ -22,7 +22,6 @@ const _STRINGS = {
   TASKDESCRIPTION_JSONFILE:     "create, modify and distribute jsonfiles.  "
 };
 
-/* eslint-disable */
 // Module exports:
 Object.defineProperty( module.exports, _STRINGS.PROPERTY_TASKNAME_JSONFILE, {
        value:    _STRINGS.TASKNAME_JSONFILE,
@@ -30,4 +29,3 @@ Object.defineProperty( module.exports, _STRINGS.PROPERTY_TASKNAME_JSONFILE, {
 Object.defineProperty( module.exports, _STRINGS.PROPERTY_TASKDESC_JSONFILE, {
        value:    _STRINGS.TASKDESCRIPTION_JSONFILE,
        writable: false, enumerable: true, configurable: false });
-/* eslint-enable */

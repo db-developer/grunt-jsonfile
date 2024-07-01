@@ -9,7 +9,7 @@
  *  options/jsonfile.js  is distributed WITHOUT ANY WARRANTY; without even the
  *  implied  warranty of MERCHANTABILITY or  FITNESS FOR A PARTICULAR PURPOSE.
  *
- *//* eslint-disable-next-line */
+ */
 "use strict";
 
 /**
@@ -84,15 +84,13 @@ function getTemplateFromOptions( grunt, task, templatename ) {
   else { return template; }
 }
 
-/* eslint-disable */
 // Module exports:
 Object.defineProperty( module.exports, _STRINGS.GETEOF, {
-       value:    getEOF,
-       writable: false, enumerable: true, configurable: false });
+  value:    getEOF,
+  writable: false, enumerable: true, configurable: false });
 Object.defineProperty( module.exports, _STRINGS.GETTEMPLATEFROMOPTIONS, {
-       value:    getTemplateFromOptions,
-       writable: false, enumerable: true, configurable: false });
+  value:    getTemplateFromOptions,
+  writable: false, enumerable: true, configurable: false });
 Object.defineProperty( module.exports, _STRINGS.GETOPTIONS,     {
-       value:    getOptions,
-       writable: false, enumerable: true, configurable: false });
-/* eslint-enable */
+  value:    getOptions,
+  writable: false, enumerable: true, configurable: false });

@@ -9,7 +9,7 @@
  *  tasks/jsonfile.js  is distributed WITHOUT ANY WARRANTY; without even the
  *  implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  *
- *//* eslint-disable-next-line */
+ */
 "use strict";
 
 /**
@@ -177,17 +177,17 @@ function runTaskJSONFile( grunt, task ) {
 
 // Module exports:
 Object.defineProperty( module.exports, _STRINGS.GETTEMPLATE,  {
-       value:    getTemplate,
-       writable: false, enumerable: true, configurable: false });
+  value:    getTemplate,
+  writable: false, enumerable: true, configurable: false });
 Object.defineProperty( module.exports, _STRINGS.MERGEVALUES,  {
-       value:    mergeValues,
-       writable: false, enumerable: true, configurable: false });
+  value:    mergeValues,
+  writable: false, enumerable: true, configurable: false });
 Object.defineProperty( module.exports, _STRINGS.RUNTASKJSONFILE,  {
-       value:    runTaskJSONFile,
-       writable: false, enumerable: true, configurable: false });
+  value:    runTaskJSONFile,
+  writable: false, enumerable: true, configurable: false });
 Object.defineProperty( module.exports, _STRINGS.SETVALUES,    {
-       value:    setValues,
-       writable: false, enumerable: true, configurable: false });
+  value:    setValues,
+  writable: false, enumerable: true, configurable: false });
 Object.defineProperty( module.exports, _STRINGS.UPDATEVALUES, {
-       value:    updateValues,
-       writable: false, enumerable: true, configurable: false });
+  value:    updateValues,
+  writable: false, enumerable: true, configurable: false });

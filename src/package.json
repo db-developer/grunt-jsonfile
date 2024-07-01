@@ -1,6 +1,6 @@
 {
   "name": "grunt-jsonfile",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "create, modify and distribute jsonfiles.",
   "author": "Dirk Brenckmann <db.developer@gmx.de>",
   "license": "MIT",
