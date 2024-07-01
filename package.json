@@ -6,7 +6,7 @@
   "license": "MIT",
   "engineStrict": true,
   "engines": {
-    "node": ">=14"
+    "node": ">=18"
   },
   "main": "tasks/tasks.js",
   "scripts": {
@@ -45,11 +45,11 @@
     "babel-loader": "^9.1.2",
     "expect.js": "^0.3.1",
     "grunt": "^1.6.1",
-    "grunt-check-outdated": "^1.1.0",
+    "grunt-check-outdated": "^1.2.0",
     "grunt-contrib-clean": "^2.0.1",
     "grunt-contrib-copy": "^1.0.0",
     "grunt-eslint": "^25.0.0",
-    "grunt-jsdoc2md": "^1.1.0",
+    "grunt-jsdoc2md": "^1.2.0",
     "grunt-mkdir": "^1.1.0",
     "grunt-move": "^2.0.0",
     "grunt-nyc-mocha": "^1.2.0",
