@@ -79,10 +79,13 @@ function mergeValues( target, container ) {
   Object.keys( container ).forEach( function( key /* , index */) {
     if (( ! target[ key ]) ||
         ( _m.lib.isString( target[ key ]) ||
-          _m.lib.isNumber( target[ key ]) ||
-          Array.isArray( target[ key ])))  {
+          _m.lib.isNumber( target[ key ])))  {
           if ( container[ key ] !== undefined ) { target[ key ] = container[ key ]; }
           else { delete target[ key ]; }
+    }
+    else if (( target[ key ]) && ( Array.isArray( target[ key ]))) {
+          if ( Array.isArray( container[ key ])) { target[ key ] = [ ...target[ key ], ...container[ key ] ]}
+          else { target[ key ] = container[ key ]}
     }
     else if (( target[ key ]) && ( container[ key ] === undefined )) { delete target[ key ]; }
     else if (( ! ( target[ key ] instanceof Function )) && ( ! ( container[ key ] instanceof Function ))) {

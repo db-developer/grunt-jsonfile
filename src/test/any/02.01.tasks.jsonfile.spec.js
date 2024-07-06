@@ -118,13 +118,21 @@ const expect    = require( "expect.js" );
           expect(() => { jsonfile.mergeValues( target, container ); }).not.to.throwException();
           expect( JSON.stringify( target ) === JSON.stringify( container )).to.be.ok();
       });
-      it( "should be callable with 'target' { 3 } and 'container' { 4 }", () => {
+      it( "should be callable with 'target' { 3 } and 'container' { 4.0 }", () => {
+          const thurz     = [ 1, 2, 3 ];
+          const churz     = [ 3, 4, 5 ];
+          const target    = { hurz: [ ...thurz ]};
+          const container = { hurz: [ ...churz ]};
+          const expected  = { hurz: [ ...thurz, ...churz ]};
+          expect(() => { jsonfile.mergeValues( target, container )}).not.to.throwException();
+          expect( JSON.stringify( target ) === JSON.stringify( expected )).to.be.ok();
+      });
+      it( "should be callable with 'target' { 3 } and 'container' { 4.1 }", () => {
           const target    = { hurz: [ 1, 2, 3 ]};
-          const container = { hurz: [ 3, 4, 5 ]};
-          expect(() => { jsonfile.mergeValues( target, container ); }).not.to.throwException();
+          const container = { hurz: "blubb"};
+          expect(() => { jsonfile.mergeValues( target, container )}).not.to.throwException();
           expect( JSON.stringify( target ) === JSON.stringify( container )).to.be.ok();
       });
-// =>
       it( "should be callable with 'target' { 4 } and 'container' { 5 }", () => {
           const target    = { hurz: { }};
           const container = { hurz: undefined };

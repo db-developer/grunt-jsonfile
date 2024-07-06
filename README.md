@@ -205,7 +205,7 @@ const jsonfile = {
     dest:     `${ BUILD }/file.json`,   // write the result to this file.
     merge: {
       pname3: { key: { test: "fun" }},  // this will replace value by { test: "fun" }
-      aproperty: null                   // this will remove aproperty from template
+      aproperty: undefined              // this will remove aproperty from template
     }
   }
 }

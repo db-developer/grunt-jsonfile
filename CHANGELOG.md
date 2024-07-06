@@ -14,6 +14,11 @@ All notable changes to this project will be documented in this file.
 
 ## [1.2.0] - 2024-07-01
 
+### Fixed
+- Fixed merging of arrays. Arrays will no longer be replaced. Arrays will be concatenated instead.
+
+## [1.2.0] - 2024-07-01
+
 Updated dependencies (versions) in package.json
 Dropped support for nodejs versions prior 18 see: https://nodejs.org/en/about/releases/
 Changed eslint config file to flat
