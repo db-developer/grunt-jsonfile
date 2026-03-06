@@ -1,34 +1,23 @@
 /**
- *	index.js: grunt-jsonfile/tasks
+ *	lib/tasks/index.js: grunt-jsonfile/tasks
  *
  *  @module grunt-jsonfile/tasks
  *
  *//*
- *  © 2020, slashlib.org.
+ *  © 2026, db-developer.
  *
- *  tasks/index.js  is  distributed  WITHOUT ANY WARRANTY;  without even the
- *  implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- *
+ *  Distributed  WITHOUT  ANY WARRANTY;  without  even the  implied
+ *  warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  */
 "use strict";
 
-/**
- *  Module initializer
- *  @ignore
- */
-const _m = {
-  jsonfile:         require( "./jsonfile" )
-};
+const jsonfile = require( "./jsonfile" );
 
 /**
- *  Stringtable
- *  @ignore
+ *  Public API function that runs a grunt task.
+ *
+ *  @function module:grunt-jsonfile/tasks.runTask
+ *  @see module:grunt-jsonfile/tasks/jsonfile.runTask
  */
-const _STRINGS = {
-  RUNTASKJSONFILE:  "runTaskJSONFile"
-};
 
-// Module exports:
-Object.defineProperty( module.exports, _STRINGS.RUNTASKJSONFILE,  {
-  value:    _m.jsonfile.runTaskJSONFile,
-  writable: false, enumerable: true, configurable: false });
+module.exports.runTask = jsonfile.runTask;

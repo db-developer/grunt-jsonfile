@@ -1,31 +1,34 @@
 /**
- *	constants.js: grunt-jsonfile
+ *	lib/constants.js: grunt-jsonfile
  *
  *  @module grunt-jsonfile/constants
  *
  *//*
- *  © 2020, db-developer.
+ *  © 2026, db-developer.
  *
- *  constants.js  is distributed  WITHOUT  ANY WARRANTY;  without  even  the
- *  implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ *  Distributed  WITHOUT  ANY WARRANTY;  without  even the  implied
+ *  warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  */
 "use strict";
 
 /**
- *  Stringtable
- *  @ignore
+ *  Name of the Grunt task as registered via `grunt.registerTask`.
+ *
+ *  This constant defines the public task identifier that users invoke
+ *  in the Grunt CLI or within their Grunt configuration.
+ *
+ *  @constant {string}
+ *  @default
  */
-const _STRINGS = {
-  PROPERTY_TASKNAME_JSONFILE:   "TASKNAME_JSONFILE",
-  PROPERTY_TASKDESC_JSONFILE:   "TASKDESCRIPTION_JSONFILE",
-  TASKNAME_JSONFILE:            "jsonfile",
-  TASKDESCRIPTION_JSONFILE:     "create, modify and distribute jsonfiles.  "
-};
+module.exports.TASKNAME = "jsonfile";
 
-// Module exports:
-Object.defineProperty( module.exports, _STRINGS.PROPERTY_TASKNAME_JSONFILE, {
-       value:    _STRINGS.TASKNAME_JSONFILE,
-       writable: false, enumerable: true, configurable: false });
-Object.defineProperty( module.exports, _STRINGS.PROPERTY_TASKDESC_JSONFILE, {
-       value:    _STRINGS.TASKDESCRIPTION_JSONFILE,
-       writable: false, enumerable: true, configurable: false });
+/**
+ *  Human-readable description of the Grunt task.
+ *
+ *  Used for CLI help output and documentation to summarize the
+ *  functional responsibility of the task.
+ *
+ *  @constant {string}
+ *  @default
+ */
+module.exports.TASKDESCRIPTION = "Create, modify and distribute jsonfiles.";

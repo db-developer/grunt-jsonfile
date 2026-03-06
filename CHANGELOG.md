@@ -1,3 +1,5 @@
+[BOTTOM](#029---2021-03-02) [AI](AI.md) [LICENSE](LICENSE) [README](README.md)
+
 # Changelog
 
 All notable changes to this project will be documented in this file.
@@ -12,7 +14,14 @@ All notable changes to this project will be documented in this file.
 
 - No Fixes yet
 
-## [1.2.0] - 2024-07-01
+## [1.3.0] - 2026-03-06
+
+Added links to AI.md, CHANGELOG.md and LICENSE.md for better navigation and documentation.
+Updated package.json to reflect the latest version and dependencies.
+Complete code overhaul to improve performance and maintainability, including refactoring of core modules and optimization of algorithms.
+Added better and more documentation.
+
+## [1.2.1] - 2024-07-01
 
 ### Fixed
 - Fixed merging of arrays. Arrays will no longer be replaced. Arrays will be concatenated instead.
@@ -52,3 +61,5 @@ Update to "stable" major version without breaking changes.
 
 - Added CHANGELOG.md
 - Added option EOF
+
+[TOP](#changelog) [AI](AI.md) [LICENSE](LICENSE) [README](README.md)

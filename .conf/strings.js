@@ -34,6 +34,5 @@ module.exports = {
   TASKS:        "tasks",
   TEMPLATE:     "template",
   TEST:         "test",
-  TMP:          "tmp",
-  WEBPACK:      "webpack"
+  TMP:          "tmp"
 }

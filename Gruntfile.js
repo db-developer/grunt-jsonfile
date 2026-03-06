@@ -39,8 +39,7 @@ module.exports = function( grunt ) {
                                          strings.MKDIR,    `${ strings.COPY  }:build`,
                                          strings.BUILDRO ]);
 
-  grunt.registerTask( strings.BUILDWP, [ strings.WEBPACK ]);
-
+  // run rollup (there can be targets for webpack and rollup, but for now just rollup)
   grunt.registerTask( strings.BUILDRO, [ strings.ROLLUP  ]);
 
   // run coverage (required by travis)

@@ -1,12 +1,12 @@
 {
   "name": "grunt-jsonfile",
-  "version": "1.2.1",
+  "version": "1.3.0",
   "description": "create, modify and distribute jsonfiles.",
   "author": "Dirk Brenckmann <db.developer@gmx.de>",
   "license": "MIT",
   "engineStrict": true,
   "engines": {
-    "node": ">=12"
+    "node": ">=20"
   },
   "main": "tasks/tasks.js",
   "repository": {
@@ -23,7 +23,11 @@
   "files": [
     "docs",
     "tasks",
-    "lib"
+    "lib",
+    "AI.md",
+    "CHANGELOG.md",
+    "LICENSE",
+    "README.md"
   ],
   "bugs": {
     "url": "https://github.com/db-developer/grunt-jsonfile/issues"

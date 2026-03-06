@@ -10,16 +10,16 @@ const expect    = require( "expect.js" );
   describe( "10.00.index.spec.js", () => {
     const index = require( "../../lib/index" );
 
-    describe( "Testing exports of module 'tasks'", () => {
-      it( "Function 'registerMultiTaskJSONFile' should exist", () => {
-          expect( index.registerMultiTaskJSONFile ).not.to.be( undefined  );
-          expect( index.registerMultiTaskJSONFile ).not.to.be( null       );
-          expect( index.registerMultiTaskJSONFile ).to.be.a(   "function" );
+    describe( "Testing exports of module 'lib (lib/index)'", () => {
+      it( "Function 'registerMultiTask' should exist", () => {
+          expect( index.registerMultiTask ).not.to.be( undefined  );
+          expect( index.registerMultiTask ).not.to.be( null       );
+          expect( index.registerMultiTask ).to.be.a(   "function" );
       });
     });
-    describe( "Testing function 'registerMultiTaskJSONFile' of module 'lib/index'", () => {
+    describe( "Testing function 'registerMultiTask' of module 'lib (lib/index)'", () => {
       it( "should be callable without arguments", () => {
-          expect(() => { index.registerMultiTaskJSONFile( env.grunt ); }).not.to.throwException();
+          expect(() => { index.registerMultiTask( env.grunt ); }).not.to.throwException();
       });
     });
   });

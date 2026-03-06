@@ -1,34 +1,52 @@
 /**
- *	index.js: grunt-jsonfile/options
+ *	lib/options/index.js: grunt-jsonfile/options
+ *
+ *  Public options API of the grunt-jsonfile package.
+ *
+ *  This module exposes the stable, documented interface for resolving
+ *  task options, EOF behavior, and JSON templates.
+ *
+ *  Consumers MUST depend on this module path instead of internal
+ *  implementation files.
+ *
+ *  The underlying implementation is intentionally encapsulated and
+ *  may change without notice.
  *
  *  @module grunt-jsonfile/options
  *
  *//*
- *  © 2020, slashlib.org.
+ *  © 2026, db-developer.
  *
- *  options/index.js  is distributed WITHOUT ANY WARRANTY;  without even the
- *  implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- *
+ *  Distributed  WITHOUT  ANY WARRANTY;  without  even the  implied
+ *  warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  */
 "use strict";
 
-/**
- *  Module initializer
- *  @ignore
- */
-const _m = {
-  jsonfile:   require( "./jsonfile" )
-};
+const jsonfile = require( "./jsonfile" );
 
 /**
- *  Stringtable
- *  @ignore
+ *  Public API function that returns the effective configuration object
+ *  for a `jsonfile` Grunt task invocation.
+ *
+ *  @function module:grunt-jsonfile/options.getOptions
+ *  @see module:grunt-jsonfile/options/jsonfile.getOptions
  */
-const _STRINGS = {
-  GETOPTIONS: "getOptions"
-};
+module.exports.getOptions = jsonfile.getOptions;
 
-// Module exports:
-Object.defineProperty( module.exports, _STRINGS.GETOPTIONS, {
-  value:    _m.jsonfile.getOptions,
-  writable: false, enumerable: true, configurable: false });
+/**
+ *  Public API function that resolves the effective end-of-file (EOF)
+ *  sequence for a `jsonfile` task execution.
+ *
+ *  @function module:grunt-jsonfile/options.getEOF
+ *  @see module:grunt-jsonfile/options/jsonfile.getEOF
+ */
+module.exports.getEOF = jsonfile.getEOF;
+
+/**
+ *  Public API function that resolves a named JSON template from the
+ *  task configuration.
+ *
+ *  @function module:grunt-jsonfile/options.getTemplateReferenceFromOptions
+ *  @see module:grunt-jsonfile/options/jsonfile.getTemplateReferenceFromOptions
+ */
+module.exports.getTemplateReferenceFromOptions = jsonfile.getTemplateReferenceFromOptions;

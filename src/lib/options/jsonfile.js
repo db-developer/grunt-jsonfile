@@ -1,96 +1,163 @@
 /**
- *	options/jsonfile.js: grunt-jsonfile
+ *	lib/options/jsonfile.js: grunt-jsonfile/options
+ *
+ *  Internal implementation of the options handling logic for
+ *  grunt-jsonfile.
+ *
+ *  ⚠ This module is NOT part of the public API surface.
+ *  It may change at any time without semver guarantees.
+ *
+ *  External consumers MUST use `grunt-jsonfile/options` instead.
  *
  *  @module grunt-jsonfile/options/jsonfile
  *
  *//*
- *  © 2020, slashlib.org.
+ *  © 2026, db-developer.
  *
- *  options/jsonfile.js  is distributed WITHOUT ANY WARRANTY; without even the
- *  implied  warranty of MERCHANTABILITY or  FITNESS FOR A PARTICULAR PURPOSE.
- *
+ *  Distributed  WITHOUT  ANY WARRANTY;  without  even the  implied
+ *  warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  */
 "use strict";
 
-/**
- *  Module initializer
- *  @ignore
- */
-const _m = {
-  os:     require( "os" ),
-  lib:    require( "../lib" )
-};
+const os    = require( "node:os"  );
+const utils = require( "../utils" );
 
 /**
- *  Stringtable
- *  @ignore
+ * An empty string constant used for EOF when options.EOF is false.
+ * @ignore
  */
-const _STRINGS = {
-  EMPTY:                  "",
-  GETEOF:                 "getEOF",
-  GETOPTIONS:             "getOptions",
-  GETTEMPLATEFROMOPTIONS: "getTemplateFromOptions"
-};
+const EMPTY = "";
 
 /**
  *  Default options
+ *  @ignore
  */
-const _OPTIONS = { EOF: false }
+const OPTIONS = { EOF: false }
 
 /**
- *  Returns grunt task specific options for 'jsonfile'.
+ *  Returns the effective configuration object for the current `jsonfile`
+ *  Grunt task invocation.
  *
- *  @param  {grunt}       grunt
- *  @param  {grunt.task}  task
+ *  This function merges the internally defined default options with the
+ *  task-specific options provided via `task.options()`. The merge is
+ *  shallow and follows `Object.assign` semantics:
  *
- *  @return {Object}  'nyc_mocha' options for grunt task
+ *    - Default options are applied first.
+ *    - Task options override defaults for matching keys.
+ *    - Unknown keys provided by the task are preserved.
+ *
+ *  A new object instance is always returned. The internal default
+ *  `OPTIONS` object is never mutated.
+ *
+ *  Merge characteristics:
+ *
+ *    - Shallow merge only (no deep cloning).
+ *    - Nested objects are copied by reference.
+ *    - Primitive values are copied by value.
+ *
+ *  Error behavior:
+ *
+ *    - Throws if `task` is `undefined` or if `task.options`
+ *      is not callable (runtime error when invoking `task.options()`).
+ *
+ *  @function module:grunt-jsonfile/options/jsonfile.getOptions
+ *  @param    {grunt}      grunt - The active Grunt runtime instance.
+ *                                 (Currently unused but part of the public API.)
+ *  @param    {grunt.task} task  - The Grunt task context providing `task.options()`.
+ *  @returns  {Object}     A new object containing the merged task configuration.
  */
-function getOptions( grunt, task ) {
-  const  options   = JSON.parse( JSON.stringify( _OPTIONS ));
-  return Object.assign( options, task.options());
+module.exports.getOptions = function getOptions( grunt, task ) {
+  return Object.assign({ }, OPTIONS, task.options());
 }
 
 /**
- *  Returns EOF (end of file) from options.
- *  If options.EOF is true this function will return the os
- *  specific EOL.
+ *  Resolves the effective end-of-file (EOF) sequence for the current
+ *  `jsonfile` task invocation.
  *
- *  @param  {grunt}       grunt
- *  @param  {grunt.task}  task
+ *  The returned value depends on the merged task options obtained via
+ *  {@link module:grunt-jsonfile/options/jsonfile.getOptions}.
  *
- *  @return {string} wich either is an empty string or an 'end of line'
+ *  Behavior:
+ *
+ *    - If `options.EOF === true`, the platform-specific line terminator
+ *      (`os.EOL`) is returned.
+ *    - If `options.EOF === false` (default), an empty string is returned.
+ *
+ *  This function does not mutate any state. It strictly derives the
+ *  EOF suffix from the effective task configuration.
+ *
+ *  Error behavior:
+ *
+ *    - Throws if `task` is `undefined` or does not expose a callable
+ *      `options()` function (propagated from `getOptions`).
+ *
+ *  @function module:grunt-jsonfile/options/jsonfile.getEOF
+ *  @param    {grunt}      grunt - The active Grunt runtime instance.
+ *                                 (Currently unused but required by API.)
+ *  @param    {grunt.task} task  - The Grunt task context providing `task.options()`.
+ *  @returns  {string}     The platform-specific end-of-line sequence (`os.EOL`)
+ *                         if enabled; otherwise an empty string.
  */
-function getEOF( grunt, task ) {
-  const options = getOptions( grunt, task );
-  return options.EOF ? _m.os.EOL : /*istanbul ignore next */ _STRINGS.EMPTY;
+module.exports.getEOF = function getEOF( grunt, task ) {
+  const options = module.exports.getOptions( grunt, task );
+  return options.EOF ? os.EOL : EMPTY;
 }
 
 /**
- *  Load json template by name.
+ *  Resolves and returns a JSON template reference by its logical name
+ *  from the task configuration. A template reference must be cloned,
+ *  before being modified, to avoid mutating the original template.
  *
- *  @param  {grunt}       grunt
- *  @param  {grunt.task}  task
- *  @param  {string}      templatename to load.
+ *  The template lookup is performed against the `templates` property
+ *  of the merged task options (see
+ *  {@link module:grunt-jsonfile/options/jsonfile.getOptions}).
+ *
+ *  Resolution behavior:
+ *
+ *    1. The given `templatename` is used as key in `options.templates`.
+ *    2. If no template with that name exists, `null` is returned.
+ *    3. If the resolved template value is a string, it is interpreted
+ *       as a file path and loaded via `grunt.file.readJSON(...)`.
+ *    4. If the resolved value is a plain object literal, it is returned
+ *       as-is.
+ *
+ *  No deep cloning is performed. Objects stored in `options.templates`
+ *  are returned by reference.
+ *
+ *  Error behavior:
+ *
+ *    - Throws if `task` is `undefined` or does not provide a callable
+ *      `options()` function (propagated from `getOptions`).
+ *    - Throws if `options.templates` is not a plain object.
+ *    - Throws if the resolved template value is neither a plain object
+ *      nor a string.
+ *    - Throws if `grunt.file.readJSON` fails (e.g. invalid path or
+ *      invalid JSON content).
+ *
+ *  @function module:grunt-jsonfile/options/jsonfile.getTemplateReferenceFromOptions
+ *  @param    {grunt}       grunt        - The active Grunt runtime instance.
+ *  @param    {grunt.task}  task         - The Grunt task context providing `task.options()`.
+ *  @param    {string}      templatename - The logical template key to resolve.
+ *  @returns  {Object|null} The resolved template object, or `null` if no template
+ *                          with the given name exists.
  */
-function getTemplateFromOptions( grunt, task, templatename ) {
-  const options = getOptions( grunt, task );
-  /* istanbul ignore if */
-  if ( ! options.templates ) { return null; }
+module.exports.getTemplateReferenceFromOptions = function getTemplateReferenceFromOptions( grunt, task, templatename ) {
+  const options = module.exports.getOptions( grunt, task );
 
-  let template = options.templates[ templatename ];
-  if ( _m.lib.isString( template )) {
+  if ( !utils.isPlainObject( options.templates )) { 
+       throw new Error( `No templates defined in options. Cannot resolve template named '${ templatename }'.` );
+  }
+
+  const template = options.templates[ templatename ];
+
+  if ( template === undefined ) {
+       return null;
+  }
+  else if ( utils.isPlainObject( template )) {
+       return template;
+  }
+  else if ( utils.isString( template )) {
        return grunt.file.readJSON( template );
   }
-  else { return template; }
+  else throw new Error( `JSON template named '${ templatename }' is of invalid type '${ typeof template }'.` );
 }
-
-// Module exports:
-Object.defineProperty( module.exports, _STRINGS.GETEOF, {
-  value:    getEOF,
-  writable: false, enumerable: true, configurable: false });
-Object.defineProperty( module.exports, _STRINGS.GETTEMPLATEFROMOPTIONS, {
-  value:    getTemplateFromOptions,
-  writable: false, enumerable: true, configurable: false });
-Object.defineProperty( module.exports, _STRINGS.GETOPTIONS,     {
-  value:    getOptions,
-  writable: false, enumerable: true, configurable: false });

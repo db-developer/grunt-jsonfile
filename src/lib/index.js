@@ -1,51 +1,41 @@
 /**
- *	index.js: grunt-jsonfile
+ *	lib/index.js: grunt-jsonfile
  *
  *  @module grunt-jsonfile
  *
  *//*
- *  © 2020, slashlib.org.
+ *  © 2026, db-developer.
  *
- *  index.js  is distributed WITHOUT ANY WARRANTY; without even the implied
- *  warranty  of  MERCHANTABILITY  or  FITNESS  FOR  A PARTICULAR  PURPOSE.
- *
+ *  Distributed  WITHOUT  ANY WARRANTY;  without  even the  implied
+ *  warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  */
 "use strict";
 
-/**
- *  Module initializer
- *  @ignore
- */
-const _m = {
-  const:    require( "./constants" ),
-  tasks:    require( "./tasks"     )
-}
+const constants = require( "./constants" );
+const tasks     = require( "./tasks"     );
 
 /**
- *  Stringtable
- *  @ignore
- */
-const _STRINGS = {
-  REGISTERMULTITASKJSONFILE:  "registerMultiTaskJSONFile"
-}
-
-/**
- *  Registers the 'jsonfile' multitask.
+ *  Registers the `jsonfile` Grunt multi task.
  *
- *  @param  {grunt} grunt
+ *  Attaches a multitask to the provided Grunt instance using the
+ *  configured task name and description from the constants module.
+ *  The registered task delegates execution to `tasks.runTask`
+ *  and propagates errors via `grunt.fail.fatal`.
+ *
+ *  @async
+ *  @function module:grunt-jsonfile.registerMultiTask
+ *  @param    {grunt} grunt - The Grunt instance used to register the multitask.
+ *  @returns  {Promise<void>} Resolves once the multitask has been registered.
  */
-function registerMultiTaskJSONFile( grunt ) {
-  grunt.registerMultiTask( _m.const.TASKNAME_JSONFILE, _m.const.TASKDESCRIPTION_JSONFILE,
+module.exports.registerMultiTask = function registerMultiTask( grunt ) {
+  grunt.registerMultiTask( constants.TASKNAME, constants.TASKDESCRIPTION,
     /* istanbul ignore next */ function () {
       const task = this;
-      const done = task.async();
-      _m.tasks.runTaskJSONFile( grunt, task )
-              .then((       ) => { done(); },
-                    ( error ) => { grunt.log.error( error ); done( false ); });
-  });
+      try {
+        tasks.runTask( grunt, task );
+      } catch ( error ) {
+        grunt.log.error( error );
+        grunt.fail.fatal( error );
+      }
+    });
 }
-
-// Module exports:
-Object.defineProperty( module.exports, _STRINGS.REGISTERMULTITASKJSONFILE, {
-  value:    registerMultiTaskJSONFile,
-  writable: false, enumerable: true, configurable: false });
